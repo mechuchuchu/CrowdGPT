@@ -1,0 +1,475 @@
+global_step,trained_tokens,commit_hash,commit_date_utc,commit_title,token_status_commit_hash,token_method
+0,0,b2709e4f7e34fcde4bb8451cc2a53154b34cd4b0,2026-08-23T16:03:05+00:00,Update weights (step 0),,step_0_inferred
+0,0,665c787cb69ed68b5c9b525f32df3e9e26c24273,2026-08-23T19:57:15+00:00,Update weights (step 0),dedbe383864d82c34c94448029b54d718d28179e,first_status_after_checkpoint
+5,0,04250b5673b9ed50874310c0cc4f1f1a868ba8ac,2026-08-25T12:20:37+00:00,Update weights (step 5),5c2ef1c2f66897d514d4d365db8ba673b44762e7,first_status_after_checkpoint
+6,0,9b297a94a9493da3cf55e3b33378b3a90f010328,2026-08-25T12:36:07+00:00,Update weights (step 6),d8071f1cae5acb5b0af2382163bf1813862268d7,first_status_after_checkpoint
+10,0,eec3dbcd3c6265b1173c2a11d8a06f6c5c8e1fad,2026-08-25T13:06:23+00:00,Update weights (step 10),5b2c52f5c93643469232232b3e46b91b42ac149e,first_status_after_checkpoint
+11,20480000,56b084f0790a8b6f38bedcc79d02c3b609fdc987,2026-08-26T05:17:50+00:00,Update weights (step 11),bc7b16d0d65a621ee8d2cd554727a6e7734044b2,first_status_after_checkpoint
+12,0,821c71650057da861f863aedfdc05086c9d287ad,2026-08-26T08:53:05+00:00,Update weights (step 12),0f7abc8503d45946ae8628678ef599f4de454710,first_status_after_checkpoint
+0,0,26797ecf2a196a17fc2fb13809733251c8aec932,2026-08-27T21:32:53+00:00,chore: bootstrap initial weights and engram,6c34e96a429f563c2fe288f1033e07710c209ad5,first_status_after_checkpoint
+1,156995584,a9f23de6869e28b4300333feabc469bd37bb5bb4,2026-08-29T17:51:57+00:00,"Update weights & engram (step 1, round 1)",fbfe81e981f8c0db52915d8033ac977cc2375539,first_status_after_checkpoint
+1,9814016,aadc0643f9bd7b756878b989d2a473043ab505d3,2026-08-29T19:38:06+00:00,"Update weights & engram (step 1, round 2)",7c00318b05a19dcfa7f0ff82d15bfd26e732f4ff,first_status_after_checkpoint
+2,9879552,e27b1e51599a3d309fc9a3ef1ff49abf22b9d9ff,2026-08-29T19:51:29+00:00,"Update weights & engram (step 2, round 3)",7f69f3d2f3e75a507d184c3c7c7bfe8ea5f4916a,first_status_after_checkpoint
+3,9945088,4e4046e165f67989ae4dee2f1e757837d1dbd1ac,2026-08-29T20:09:02+00:00,"Update weights & engram (step 3, round 4)",909e0e4b73bb1d23c1e6a2444a463685b55b20e7,first_status_after_checkpoint
+4,20779008,2b7a01dea518f005f626ed8d68dd87074d78c1e4,2026-08-29T22:05:33+00:00,"Update weights & engram (step 4, round 4)",3582afbecc9255b1af3d2a86752d81dad9e8d87b,first_status_after_checkpoint
+5,32821248,b0c1175f635908333b8ed3f2b59678e9c9773817,2026-08-29T23:44:22+00:00,"Update weights & engram (step 5, round 5)",157b6f26289766bb41ec573bdefde1532650ee6e,first_status_after_checkpoint
+6,32821248,b7de3fbdbbbaf081a3e4b9eb2f1fb4b7cc32a130,2026-08-29T23:50:52+00:00,"Update weights & engram (step 6, round 6)",39a2b8f0b00a00c90156370d7d9e59e36543d190,first_status_after_checkpoint
+7,44531712,5da72e14b9eff044d3a152ab17d9566d302e433a,2026-08-30T01:28:28+00:00,"Update weights & engram (step 7, round 7)",232db00401aaea19f86665f380511b939a27b66e,first_status_after_checkpoint
+8,56201216,c412af7cbd1f920c4c7bd5c1fffc078f95367d44,2026-08-30T03:05:26+00:00,"Update weights & engram (step 8, round 8)",a60da65bb72bee49a089bb2a9d81afb5aa90e3d2,first_status_after_checkpoint
+3,75415552,896479ddf2ed1caf10e332dc7b45d65114dca337,2026-08-30T19:00:23+00:00,"Update weights & engram (step 3, round 3)",134b4c6fdfb8716b3865d2aa94aac8efa4d1d822,first_status_after_checkpoint
+4,75481088,3955e4ceb58b6a7052a4fa5c25c902361cfd6007,2026-08-30T19:06:25+00:00,"Update weights & engram (step 4, round 4)",80066fd799d4581a321e6b1bced26fdde9938b59,first_status_after_checkpoint
+5,75546624,09f2df242f5587c8e80ea7657d4112a5c097b5a1,2026-08-30T19:12:55+00:00,"Update weights & engram (step 5, round 5)",b90b991600b06fd4cd8dbdee641f6debdf9f804d,first_status_after_checkpoint
+6,75612160,de4f7d38163f47f5c925be5586af824ab9ea9ea0,2026-08-30T19:19:27+00:00,"Update weights & engram (step 6, round 6)",747ee4e4eb31362616c7c0971b3525924b9339a1,first_status_after_checkpoint
+7,75677696,8d5b34eaeeaaf91f328d7d088f6cc417f25ae672,2026-08-30T19:25:58+00:00,"Update weights & engram (step 7, round 7)",99072219113eba1ff20bc41ec4335938519ac6fc,first_status_after_checkpoint
+0,0,7fcdab4072fab14c6d3696ee21c088b8086b94d5,2026-09-04T21:28:08+00:00,chore: bootstrap initial weights and engram,57724a770966f280dd80cd5f78bee2111a3a032f,first_status_after_checkpoint
+1,90021888,ff0f33c812c9bf393b74c3291bc161ec505b2d84,2026-09-05T12:06:33+00:00,"Update weights & engram (step 1, round 1)",356a6adb57347a67bbdf834af3b4cfa2096258e4,first_status_after_checkpoint
+2,105631744,8376dc87e32a1e5d2d12883988f55e5d6ffddd06,2026-09-05T14:10:24+00:00,"Update weights & engram (step 2, round 2)",bb9c4d2b4ad7ee845796dda45874d9cbb56b2b0c,first_status_after_checkpoint
+3,120774656,70bdc7b934bc6c3da3bf9a6f86c185ef36246910,2026-09-05T16:35:23+00:00,"Update weights & engram (step 3, round 3)",37ac455103a2431bbb69edfcd8a75a71b50bb84e,first_status_after_checkpoint
+4,134606848,09937fe18e76f6fd7f2302c84002f3c63d0bbdac,2026-09-05T19:17:35+00:00,"Update weights & engram (step 4, round 4)",8e09b4ea2accb0a4f741d2f6d30a7fd7de0265c1,first_status_after_checkpoint
+5,146788352,277fd71d62a6e2fd3aa8f982261e6ab75b5d3ee1,2026-09-05T21:20:11+00:00,"Update weights & engram (step 5, round 5)",f97a20dae03fe7dd0455c7c1fe036b676116ad1e,first_status_after_checkpoint
+6,161013760,990e692be629b36423b22b31e2422232b3e08f9a,2026-09-05T23:24:16+00:00,"Update weights & engram (step 6, round 6)",02791590ddfa369529378c4068a3196c7fd613ad,first_status_after_checkpoint
+7,176840704,d2f5e5ba380d3ac9ca8846a0aafb2ec1d5611ed9,2026-09-06T01:27:23+00:00,"Update weights & engram (step 7, round 7)",71e063cba19653e6954dd7d0b9cde7d8c951ea8b,first_status_after_checkpoint
+8,192753664,e03b2189b23c6e7f9777597be7bbc3e46ed4c0e0,2026-09-06T03:30:20+00:00,"Update weights & engram (step 8, round 8)",fada9278ae201b296229fd7d5bb234e2be885a56,first_status_after_checkpoint
+9,208535552,7dfb9fa9bf633668c5610d7c53096563a595eaae,2026-09-06T05:32:58+00:00,"Update weights & engram (step 9, round 9)",d2a5cd3a952be09814b2b1960c0cf00fdd0adabd,first_status_after_checkpoint
+10,224112640,e4fce06821ed07e9489a49ac53917f6e7c38e58f,2026-09-06T07:35:00+00:00,"Update weights & engram (step 10, round 10)",aa2acbd1e6f192a6c9eb042f0f46ec2851383d0f,first_status_after_checkpoint
+11,237023232,9535aefde5d1876509ec0793347340044a0687b8,2026-09-06T09:37:40+00:00,"Update weights & engram (step 11, round 11)",a8a157a84d08c02fc3c88496485628edc0360e6d,first_status_after_checkpoint
+12,250068992,80b6e084da70d3310be6812b5d45e534b0385e61,2026-09-06T11:41:19+00:00,"Update weights & engram (step 12, round 12)",6872791df465763bf4c450e4e0a2645d97936363,first_status_after_checkpoint
+13,263053312,4e81ceaa714b2a5edf04a14d4f7b7051b71b63db,2026-09-06T13:44:21+00:00,"Update weights & engram (step 13, round 13)",329821d8894757bba8c3342215eab4706a7ddda4,first_status_after_checkpoint
+14,267522048,8fef57fdcb8882a7535817459d098ba15cc3db6d,2026-09-06T15:46:59+00:00,"Update weights & engram (step 14, round 14)",dbd99116bf2cacce9232cc769fe7ccc78f1e16f4,first_status_after_checkpoint
+15,272273408,d30d9a34ace3cb64aff8cafcf4a64d04dc04a6f9,2026-09-06T17:50:23+00:00,"Update weights & engram (step 15, round 15)",dac36bb034a9b4cc71720b3c19918aa3e130bb75,first_status_after_checkpoint
+16,286334976,fd53bc99c64ca01955e52e34d07ec1fb0a0534a9,2026-09-06T19:53:10+00:00,"Update weights & engram (step 16, round 16)",55de46c73336bd02b1878ffcb3cb0b0f8b05d1bd,first_status_after_checkpoint
+17,300478464,a9c37c8ec24bfa7b39502377295df34a8607734a,2026-09-06T21:56:03+00:00,"Update weights & engram (step 17, round 17)",1d1f9bde50db5d74cc8af23de0cb093f3eca0a0a,first_status_after_checkpoint
+18,314605568,dbe48d4e7d1d78501f86065df4d45c7f0fe9d4f7,2026-09-06T23:58:42+00:00,"Update weights & engram (step 18, round 18)",fb84068d8fc93cd7193f0f957c7c9a64ff056f60,first_status_after_checkpoint
+19,328835072,d63592e39a073096e191808848211c0eca5ff5ca,2026-09-07T02:01:37+00:00,"Update weights & engram (step 19, round 19)",8558628244c4a301c2962c2900ac3f82764a9ebd,first_status_after_checkpoint
+20,343015424,04ed29cd4f3c79d352c668b8e325fa546c8a982e,2026-09-07T04:04:33+00:00,"Update weights & engram (step 20, round 20)",07bf65c2c013c5836a41cd926ae8656d342bc449,first_status_after_checkpoint
+21,357199872,c43670487ab9821d8d264cda1656920adc669688,2026-09-07T06:07:30+00:00,"Update weights & engram (step 21, round 21)",5cddf8071a668db57999c8027c51b4504e4b4dd3,first_status_after_checkpoint
+22,371421184,d49f4fb9cb84a2cd82ea30341b2ea29b36d13615,2026-09-07T08:10:16+00:00,"Update weights & engram (step 22, round 22)",35e4fc355b7e704ba77508ca4e68d3cc3564528e,first_status_after_checkpoint
+23,385753088,d506ab8cce448951cab4d44ccd0f267351f23409,2026-09-07T10:16:37+00:00,"Update weights & engram (step 23, round 23)",ab410b8fd5e106b787d74b6c9db7d5c385bfc472,first_status_after_checkpoint
+24,400084992,6532cab72a3c4a7bf6bd6c0cfba441b408a7c72f,2026-09-07T12:20:03+00:00,"Update weights & engram (step 24, round 24)",01fa30d32231dfd8d8a25b99d99013ec272cabe8,first_status_after_checkpoint
+25,414416896,c37b0c17df7d2ee8ac38ba70ec668b6cbda60d76,2026-09-07T14:23:01+00:00,"Update weights & engram (step 25, round 25)",7fec2055adea4233a2fe7f13159d8467644b6a22,first_status_after_checkpoint
+26,428740608,aa16c44e6ce446dd1c88560273c064e4cc0f8f95,2026-09-07T16:26:15+00:00,"Update weights & engram (step 26, round 26)",9583bee2d4a4362d61b58357e04f5b279fb73034,first_status_after_checkpoint
+27,443027456,e44c7b2f286dfece3a6295cb6731936b4c4fd410,2026-09-07T18:29:05+00:00,"Update weights & engram (step 27, round 27)",bfc0ccc110a6e0390f6baa8b7bd24c236cdb2917,first_status_after_checkpoint
+28,457281536,2404c8c8f088b8092b8d46e93e5f961db38297d9,2026-09-07T20:31:53+00:00,"Update weights & engram (step 28, round 28)",15a135bf5351e964bf0a4f9f77614f9fe2b4018a,first_status_after_checkpoint
+29,471576576,c754d7b53e16888b52f0f1c12468a8c9d26c8e39,2026-09-07T22:34:51+00:00,"Update weights & engram (step 29, round 29)",db3f5dae7fd0aa6ae4eb0d1442ed9030dc9912e8,first_status_after_checkpoint
+30,486264832,36c3bb47c66a59357e7eab20b4403af67f6a27c5,2026-09-08T00:37:58+00:00,"Update weights & engram (step 30, round 30)",b328e57c7429e85aeefb35eafcd5e9674aef4f63,first_status_after_checkpoint
+31,500531200,1932d5a8c2be374dcbfc0508348ac43c7ae85557,2026-09-08T02:41:32+00:00,"Update weights & engram (step 31, round 31)",e06fbce4c71f92514e6215b9459cf74830d947ff,first_status_after_checkpoint
+32,514826240,35d05199a717a95ec07ab16e1dae45fa74cc20a0,2026-09-08T04:44:38+00:00,"Update weights & engram (step 32, round 32)",43b474023611ce0e2715a2b3a77b39761639f023,first_status_after_checkpoint
+33,529125376,576d7b7b30d5883945ee8253ac2c7a58106f86e6,2026-09-08T06:47:36+00:00,"Update weights & engram (step 33, round 33)",b99ffaa02daaf93b1e0f7f9db529983c0fcfcdc7,first_status_after_checkpoint
+34,543412224,637626fca1f32431e739c197d71b9ffc7ada4ab9,2026-09-08T08:50:35+00:00,"Update weights & engram (step 34, round 34)",d0e9e13daa8e8221876c1eec4b64cd4097becf45,first_status_after_checkpoint
+35,557694976,29ff0ba7f444dfbe9272927ae357245f48df54c9,2026-09-08T10:53:27+00:00,"Update weights & engram (step 35, round 35)",d89f9ad822832fd8cc064515f165848aef24ef0f,first_status_after_checkpoint
+36,571969536,af32de8152dbfe3b6a8a7af70fbeeb14e618b5c7,2026-09-08T12:56:33+00:00,"Update weights & engram (step 36, round 36)",128d811775f8c312b3191ecd789af016d5e53557,first_status_after_checkpoint
+37,586231808,1f05824804b0d179f7da27b5df1fe02390d1e8b2,2026-09-08T14:59:26+00:00,"Update weights & engram (step 37, round 37)",d4059cd9e0b0996ae5a56ff4fbd768d0d1e73123,first_status_after_checkpoint
+38,600522752,fa3efc6ff72ca9f93b01fbb19159b65ad05ead59,2026-09-08T17:02:32+00:00,"Update weights & engram (step 38, round 38)",4b17702f2eea07913ecfd4ffee06f4959de29af1,first_status_after_checkpoint
+39,614825984,2cb9c45ca6c3e8d140e12cfda3f16af4816ab95c,2026-09-08T19:06:06+00:00,"Update weights & engram (step 39, round 39)",608eda563f2dedfc6d4a0a151c8d3452b7d7919e,first_status_after_checkpoint
+40,629145600,b277e4c8fca0b05d3524983e60683467c3f5009d,2026-09-08T21:08:54+00:00,"Update weights & engram (step 40, round 40)",906ce4ad71c72bc79d186480c5f96be8b47f0360,first_status_after_checkpoint
+41,643411968,84c082d34460fefa697dbc561392ab1b1099513b,2026-09-08T23:11:39+00:00,"Update weights & engram (step 41, round 41)",c142760f776b731179891c560c0f7442796d9c74,first_status_after_checkpoint
+42,657719296,6b949549cd9725475daa62de726c7af89a0fbd6e,2026-09-09T01:16:41+00:00,"Update weights & engram (step 42, round 42)",4f036e4ad4308ae120c12c9b5f76d3ff75d878b1,first_status_after_checkpoint
+43,672018432,05816682585cfb42a3a298b17881b060f725095a,2026-09-09T03:19:30+00:00,"Update weights & engram (step 43, round 43)",97f57254558f5460d8b57b67c1865a743454ea29,first_status_after_checkpoint
+44,686358528,1feceab18131502561b1eed3d0264fd3856b3416,2026-09-09T05:22:29+00:00,"Update weights & engram (step 44, round 44)",859511d66b60621a7f2a7d6a120aaf25e2859ac4,first_status_after_checkpoint
+45,700628992,1277ae786d6eff03c1011f7b3aeed766aaaeb687,2026-09-09T07:25:35+00:00,"Update weights & engram (step 45, round 45)",9d4041ee6a7f89bafa0d0afbd962dbdc6b8dfaa4,first_status_after_checkpoint
+46,714903552,0a78a78a435aa465eb14dc87919dce0b981302fc,2026-09-09T09:28:37+00:00,"Update weights & engram (step 46, round 46)",ad59591a054dae3f1c2d13c863b858d28dbd18e4,first_status_after_checkpoint
+47,729206784,e244f0828ccccd037fe32f58d0f4f55bc86f6665,2026-09-09T11:31:36+00:00,"Update weights & engram (step 47, round 47)",6dbd83d326e15169ef20882816b88385fe961eca,first_status_after_checkpoint
+48,743886848,5e2afa55d8280f65422c4d71f151dab41dfe249d,2026-09-09T13:35:06+00:00,"Update weights & engram (step 48, round 48)",0a3addd5aa57649231baee0768c5ddb2b290fa07,first_status_after_checkpoint
+49,758190080,4e4eb8a1d586565bb40623e60e639998284426a8,2026-09-09T15:38:41+00:00,"Update weights & engram (step 49, round 49)",767e641ee4bf48e83585f44dbcd35f2396ff3bb3,first_status_after_checkpoint
+50,772489216,b71c55fcb28ce3c31ab4032eb8c8b04bf3aa5835,2026-09-09T17:41:59+00:00,"Update weights & engram (step 50, round 50)",af3771657d46d87b417f297f71472096c864e13a,first_status_after_checkpoint
+51,786821120,6b83c083c87f7f7362783a97563324deddf55c4a,2026-09-09T19:45:02+00:00,"Update weights & engram (step 51, round 51)",7c77abacfdef4bae97468e8dc7365163df4493ec,first_status_after_checkpoint
+52,801132544,72f6e4408e29b713fdbc1c06f05177d90975156d,2026-09-09T21:47:46+00:00,"Update weights & engram (step 52, round 52)",f4e1808d62416475d155c806890dcd21d42dbcd3,first_status_after_checkpoint
+53,815398912,f3d59877075c94c21f33a295c2af4d6fa970b610,2026-09-09T23:50:49+00:00,"Update weights & engram (step 53, round 53)",402e645f56706a3d48077fc8e9965638fd952be2,first_status_after_checkpoint
+54,829698048,f23760a2a3e274c8ba150b20b6f1c1d0a9996754,2026-09-10T01:56:24+00:00,"Update weights & engram (step 54, round 54)",7bb565afe5fdc951012bd6cb599793be41c27b56,first_status_after_checkpoint
+55,843997184,70335d3214798fb692f704adbe382150e3e18f78,2026-09-10T04:00:00+00:00,"Update weights & engram (step 55, round 55)",8b2a5cd59d7fef537f59dc7e91621c40b84151ed,first_status_after_checkpoint
+56,858329088,a3481998b20aba99111c2272f7115d41a7222c9b,2026-09-10T06:02:48+00:00,"Update weights & engram (step 56, round 56)",1ab7145c3611e752403a435e3f5d7fae24c2ef2d,first_status_after_checkpoint
+57,872665088,8ccdcbbc9d0ee7190607a8348d1321eacb65a7bb,2026-09-10T08:05:47+00:00,"Update weights & engram (step 57, round 57)",6f6d499dfe7443df619d41e315c9b8a818685ffe,first_status_after_checkpoint
+58,886960128,31d1020a3df7a8f26c4b414c1991b6a617ef8467,2026-09-10T10:08:39+00:00,"Update weights & engram (step 58, round 58)",eea7ca097bca2fa2fcc810c7fd88b2086ff77aa7,first_status_after_checkpoint
+59,901263360,37dce9e3b4d0bf008914583ff7c62850d3d06586,2026-09-10T12:11:39+00:00,"Update weights & engram (step 59, round 59)",96bcf64cd23c451a6584258cc0755bde86114a01,first_status_after_checkpoint
+60,915542016,3a2714f4c1b96df0b40b37f563aee5693efd9e0c,2026-09-10T14:14:37+00:00,"Update weights & engram (step 60, round 60)",da70216b73d50920b73cfd48c9ef2c6c70bc787d,first_status_after_checkpoint
+61,929882112,008a40a874753f85e5c6cfd53bf32bcd9b4d405e,2026-09-10T16:18:01+00:00,"Update weights & engram (step 61, round 61)",451114654b07f18bb152e7a11ac86606101a8812,first_status_after_checkpoint
+62,944144384,bf336a9eda95fe56ee66671f49bfddcf806cb72a,2026-09-10T18:20:55+00:00,"Update weights & engram (step 62, round 62)",b51c17e42725ab8fb5ee5dc9d694b35181d4230a,first_status_after_checkpoint
+1,11399168,04105d3bf2babd89cf28448bb79870926e839c09,2026-09-10T21:27:39+00:00,"Update weights & engram (step 1, round 63)",00e8a81954c0c5e5557f2cf5b5c9fe053686f973,first_status_after_checkpoint
+2,25673728,5cdcd142883e603ec01a1368684fdbdcf5df427b,2026-09-10T23:30:30+00:00,"Update weights & engram (step 2, round 64)",eca038b6bf64fca847d364472b0593a4733d4539,first_status_after_checkpoint
+3,39952384,c2eb6fdf1db6322b4ff9b23146b19a779c8375c0,2026-09-11T01:33:55+00:00,"Update weights & engram (step 3, round 65)",bd4b71ba9ac24ec34b6270f96238d3defc6872f9,first_status_after_checkpoint
+4,54284288,d7baf0ca466556b063e25e753b81ddd99e00f348,2026-09-11T03:36:36+00:00,"Update weights & engram (step 4, round 66)",33a39ebf0e52bd835457ab78cd8e041cfd8e62a6,first_status_after_checkpoint
+5,68603904,ac5fc5c4cefa9d252159f6c65adee2108a54add9,2026-09-11T05:39:32+00:00,"Update weights & engram (step 5, round 67)",c3c03a1522de27acf21125d2ab0edbee723a49d2,first_status_after_checkpoint
+6,82857984,58771f5c89ae7749c135851d932797e1a4c4793d,2026-09-11T07:42:22+00:00,"Update weights & engram (step 6, round 68)",5a47bdf5d9eb53a0c64b8545ac8aebf6b408bcc2,first_status_after_checkpoint
+7,97198080,92c573d11cb001bae609ab56f3caf32123e57dff,2026-09-11T09:45:09+00:00,"Update weights & engram (step 7, round 69)",16e064c1e5418d420573994f47992ec1a1c53edc,first_status_after_checkpoint
+8,111398912,bdb8d10867305845f41c6d0b22b55bf79f8f20f2,2026-09-11T12:13:04+00:00,"Update weights & engram (step 8, round 8)",8c78b1e0ef9bca26b6b12fa0c818992c24d65d0b,first_status_after_checkpoint
+9,125722624,c0206aca076d564db4e550d44cc72d3bf8274a82,2026-09-11T14:15:55+00:00,"Update weights & engram (step 9, round 9)",092b23cff9abcf5d2208ccf5661a95f6e14a846a,first_status_after_checkpoint
+10,139968512,e6073028dd6111fa601427b9b3ea2f30ef89e11f,2026-09-11T16:18:37+00:00,"Update weights & engram (step 10, round 10)",b27e03f6c4fad073f08cbeac4c0d3b1f2051695c,first_status_after_checkpoint
+11,154296320,e03fa8d43e43d4b6f2dbbeac72eb77eb3204c96f,2026-09-11T18:21:31+00:00,"Update weights & engram (step 11, round 11)",fd4510d4c2e5d6094cfda639428f796008567c6b,first_status_after_checkpoint
+12,168574976,f44b08ba230008c666dae9d4db010a650524e736,2026-09-11T20:24:22+00:00,"Update weights & engram (step 12, round 12)",6ce753e7408eb585db5bae047815d9a1df77b60d,first_status_after_checkpoint
+13,182898688,f3c30f34b169834d93e00e23b71209d539533fed,2026-09-11T22:27:00+00:00,"Update weights & engram (step 13, round 13)",f0bd4b37a1caef42c6cbe23f4ee0b887aba04d6f,first_status_after_checkpoint
+14,197214208,d97676a7274ae1900a074e09679dbf105edc3254,2026-09-12T00:29:55+00:00,"Update weights & engram (step 14, round 14)",91cf0e56b605abaf939d8594274f2179d7728db2,first_status_after_checkpoint
+15,211501056,f7f94a40230fce9f1ce0bdfd54fd2abb4605b581,2026-09-12T02:34:40+00:00,"Update weights & engram (step 15, round 15)",002e364e91d5a672a971df2d513c7fbfe0228f50,first_status_after_checkpoint
+16,225845248,32b221bfbd814ec8d0dc1d6f228f4cbb6f3f6347,2026-09-12T04:37:23+00:00,"Update weights & engram (step 16, round 16)",161b9b789e667e6b3ce0bada0376e4f5ac1529bb,first_status_after_checkpoint
+17,240164864,5bc913a7303d23821e73fc88824398a1e3f35535,2026-09-12T06:40:12+00:00,"Update weights & engram (step 17, round 17)",ac5c5bd0ce57f2c0feca9e2bbc2fb9f5dfcaf8c1,first_status_after_checkpoint
+18,254435328,f8519e4fe501448cc7242d46bc5a9952d7ee4e9a,2026-09-12T08:42:53+00:00,"Update weights & engram (step 18, round 18)",0fb797d6e2cabd5318c0f2c6dfb24543ac76380c,first_status_after_checkpoint
+19,268783616,9614f3d91b0a01081494d9f17ae95a784d0437f7,2026-09-12T10:45:36+00:00,"Update weights & engram (step 19, round 19)",fa2f1025f62a3ba8dcaa4770b1a03436b0f75848,first_status_after_checkpoint
+20,282415104,84455d94fa7c8d95cce67220ff143983249200a2,2026-09-12T12:47:49+00:00,"Update weights & engram (step 20, round 20)",a89ed52f0a4f06078952c26f57b6cfb1bd3a0e7d,first_status_after_checkpoint
+21,295800832,52ed872390129433597fec4bbe7a3b76c26d0ae2,2026-09-12T18:59:11+00:00,"Update weights & engram (step 21, round 21)",1dc4210fa854dbb67141f63189020d8ca0b6703a,first_status_after_checkpoint
+22,308084736,d1c2fa6143aaac71f770ac1712861bbda3030967,2026-09-12T21:01:24+00:00,"Update weights & engram (step 22, round 22)",0bd40caf5518bae40205bea278b2db67a171eae3,first_status_after_checkpoint
+23,315822080,b030f6c5a02a41d3a5fb0ed13217a8221413eb19,2026-09-12T23:04:39+00:00,"Update weights & engram (step 23, round 23)",34176d0e03742e54a35296a2b71512fd9c04b47a,first_status_after_checkpoint
+24,329920512,227242b63f107e0778b861ab791ee2d3b1d133f0,2026-09-13T01:08:02+00:00,"Update weights & engram (step 24, round 24)",f21da5941d32e57de6b7c9676c01500e8d1e1a0e,first_status_after_checkpoint
+25,344043520,5c45231937375b36365e7746545d1b592261a862,2026-09-13T03:10:53+00:00,"Update weights & engram (step 25, round 25)",8ceb2d8c21c6f3fdaa9c7969c48a2405717dfdab,first_status_after_checkpoint
+26,358178816,06782544efd3dbfb0bd97c8d94e8a227041b7cf6,2026-09-13T05:13:41+00:00,"Update weights & engram (step 26, round 26)",c8c0cb03550f3ec6f033626adf299d9e9ab7f58f,first_status_after_checkpoint
+27,372301824,8100bf280d2c054ddcd13ae6f6cbba527b875e77,2026-09-13T07:17:39+00:00,"Update weights & engram (step 27, round 27)",056b4745a059a6b852736e4832b6f37fed43bccd,first_status_after_checkpoint
+28,386490368,2f90ac475d08ba62a28dd61ba07a16c5d24396f3,2026-09-13T09:19:50+00:00,"Update weights & engram (step 28, round 28)",b9e873fd13b193794c74bc42532368c232496e59,first_status_after_checkpoint
+29,401203200,0b912cad2e7563e0e7680849523dd53f64951b8e,2026-09-13T11:22:00+00:00,"Update weights & engram (step 29, round 29)",7b9fea4b3f5c75116ef631dbc8e4cab8e487fd98,first_status_after_checkpoint
+30,415260672,157082c85d9c0c2c6a72ed4570d7292aaa118bc4,2026-09-13T13:24:26+00:00,"Update weights & engram (step 30, round 30)",8be578c6130b52495de07fbe434a6513d54658f5,first_status_after_checkpoint
+31,429969408,07f363ccbdb2e20b2410af9bc6a9c121c8ee519e,2026-09-13T15:26:50+00:00,"Update weights & engram (step 31, round 31)",74db8cc65985dd8a0e0193060fc847c7a07d669b,first_status_after_checkpoint
+32,444289024,c48daca809bca78fa01e8fd88880730d599f2ae0,2026-09-13T17:29:09+00:00,"Update weights & engram (step 32, round 32)",f72a21089ed7336440a2bef4f026fecdb04f2d83,first_status_after_checkpoint
+33,459001856,26b264384c92165a103fd566a40452efbfa2d62f,2026-09-13T19:31:28+00:00,"Update weights & engram (step 33, round 33)",0d2263c3521a22980767ad4d721d5a9065f05297,first_status_after_checkpoint
+34,473714688,bf57c13bb350a22cd76f5e3a370a360b33692a00,2026-09-13T21:33:55+00:00,"Update weights & engram (step 34, round 34)",7cca9012a632d3ba9772dc4c33da5e09d11199ec,first_status_after_checkpoint
+35,488296448,262f2adfaa075a7f3ed58030b713926e51dd7032,2026-09-13T23:36:48+00:00,"Update weights & engram (step 35, round 35)",b8fa0cbd1b5fef6182af78ee52c7ad7eb97f7a92,first_status_after_checkpoint
+36,502878208,5779d9cb12f2303aca7ebda2ee481a2d1774332c,2026-09-14T01:39:08+00:00,"Update weights & engram (step 36, round 36)",ed74bf31675dd12575b3b2347e159f16f3535a2b,first_status_after_checkpoint
+37,517459968,7cd5b27e684c0617b2608bda4311dfdf92b8d520,2026-09-14T03:41:24+00:00,"Update weights & engram (step 37, round 37)",b1a9b8e0c15c37bf19e6e377250a60d172329109,first_status_after_checkpoint
+38,532041728,22b32d67884c86e8143a2e4d068548dd1a7d12ea,2026-09-14T05:43:50+00:00,"Update weights & engram (step 38, round 38)",e6d5c05fe0406bc82f7fdcf63631d0d4b1de970c,first_status_after_checkpoint
+39,546754560,e997c1398cea05bf3b6906b46cbbcb0e40a9eca2,2026-09-14T07:46:16+00:00,"Update weights & engram (step 39, round 39)",858d26e052941d19a0029243284d7752bcb3f75e,first_status_after_checkpoint
+40,561336320,471364c407ff59f0343c6f45c92643683eca7d6f,2026-09-14T09:48:44+00:00,"Update weights & engram (step 40, round 40)",01a0e934e161127653063a958af9e50b547ace2f,first_status_after_checkpoint
+41,575918080,0e227c86c16e8cc5a86e858d49620c76edbce8fb,2026-09-14T11:51:11+00:00,"Update weights & engram (step 41, round 41)",dc5f9c61809263a78c876a937280bf8248d808a4,first_status_after_checkpoint
+42,590630912,e00e30460c766cf1511678d547b951ac09bf8874,2026-09-14T13:57:01+00:00,"Update weights & engram (step 42, round 42)",5e2c0eae35d78a29d94810dc039fda24eba8f807,first_status_after_checkpoint
+43,605212672,1885a70e670c51091589ff09f9ad89aa2dcbbd42,2026-09-14T15:59:18+00:00,"Update weights & engram (step 43, round 43)",5fcebaa6150d5a5c5ea0d3e955b7a88e7e932725,first_status_after_checkpoint
+44,619794432,3d09e9ad3339a834c1cb01ae6962e91bc7962c29,2026-09-14T18:01:45+00:00,"Update weights & engram (step 44, round 44)",5fd8516b285a52ed4ab431d0fe8ca208251b47bb,first_status_after_checkpoint
+45,634507264,90506a3edc234d9c75806b092eb769fd2908b4d7,2026-09-14T20:04:37+00:00,"Update weights & engram (step 45, round 45)",434d6ef3f258ecdfeb8cf2b3b62200ed0e8b01a2,first_status_after_checkpoint
+46,649089024,6ac7cbad68305b6f7586130b78689601db28e83d,2026-09-14T22:06:56+00:00,"Update weights & engram (step 46, round 46)",2506ab8973935c5b5476da753a05f24256926d51,first_status_after_checkpoint
+47,663670784,ddd732a0bf47a6f027ffbab6a06be8793465ea62,2026-09-15T00:09:19+00:00,"Update weights & engram (step 47, round 47)",99840cba77d9f83c0da0e1350b9a22f68b243965,first_status_after_checkpoint
+48,678252544,ad2a7dc4f934df19b98763ce692dd38abe7d9bde,2026-09-15T02:11:40+00:00,"Update weights & engram (step 48, round 48)",377e406c918512c8f605af5f053a11784fe06231,first_status_after_checkpoint
+49,692965376,1620dc480796b5e786f49733d0519903910f7b45,2026-09-15T04:14:04+00:00,"Update weights & engram (step 49, round 49)",1cd39485f71d07b8252bd9faa6b5a92350e4ea61,first_status_after_checkpoint
+50,707678208,4510e9b535471997d6afd51e112a7e6751f47ba8,2026-09-15T06:20:35+00:00,"Update weights & engram (step 50, round 50)",661d60064feae840293b1afda30de9a819af29cc,first_status_after_checkpoint
+51,722259968,08ee45d13e2cc98c3f38d78d8f59693ed86ad8f1,2026-09-15T08:23:01+00:00,"Update weights & engram (step 51, round 51)",951fa460e82c40212e65cef6e8c685fda465fe3a,first_status_after_checkpoint
+52,736841728,0d03eb9cdc17ec74fefc5a99093a69e74b643424,2026-09-15T10:25:32+00:00,"Update weights & engram (step 52, round 52)",7f0e159fed1baf9a77e8832af2b124d8bbc2c227,first_status_after_checkpoint
+53,751423488,ce844409c59f56c273b9f4db1f64adb9e3719a2f,2026-09-15T12:27:48+00:00,"Update weights & engram (step 53, round 53)",ec693365e12a6ade90e38ff9216302742c6f853e,first_status_after_checkpoint
+54,766398464,23708008cd770ca9cf358351e500b12190e5acd9,2026-09-15T19:58:38+00:00,"Update weights & engram (step 54, round 54)",2dd8b5a4d9210928b552a6b764330f5547c00f1a,first_status_after_checkpoint
+55,780980224,da9c1716e57c5bcfa515bac8deb62498398d3e7f,2026-09-15T22:00:58+00:00,"Update weights & engram (step 55, round 55)",ecfaa6ba98a3a8797b8f3260dfa537b7613ed74a,first_status_after_checkpoint
+56,795561984,41bb10b9fe0bb528fff17fbee61694cedc5a2568,2026-09-16T00:03:24+00:00,"Update weights & engram (step 56, round 56)",6b2dfb5a54c7a3caa8ec95a021df2cc5f2c0d266,first_status_after_checkpoint
+57,810274816,0f2b48e05a5abc88ec298783f0321631cfd4b3df,2026-09-16T02:05:43+00:00,"Update weights & engram (step 57, round 57)",5e8af272f85f28ef6b4f6d0f25cf34b3eca738ea,first_status_after_checkpoint
+58,824856576,610933b4f478cc09be4f47128bff441c61c010c2,2026-09-16T04:08:05+00:00,"Update weights & engram (step 58, round 58)",51f36913b9c9cb4f1e6706ac08d4cf13a38bcb76,first_status_after_checkpoint
+59,839569408,1b8d680d05af4f9b8358d0e4cf15e5f1936a4f98,2026-09-16T06:10:26+00:00,"Update weights & engram (step 59, round 59)",c70301eaa2beba01e7657587fa73889ca110acbb,first_status_after_checkpoint
+60,854282240,b0fb84673f79c7983175212f3313aac229989208,2026-09-16T08:13:18+00:00,"Update weights & engram (step 60, round 60)",5fb2b5917b8733b8e7289beb33e0d4ce7e42d2d1,first_status_after_checkpoint
+61,868864000,8b35c50a39086e4a4172a9ffd62b917e89a3c737,2026-09-16T10:15:37+00:00,"Update weights & engram (step 61, round 61)",02643d8e7dd0da14feebc35fb272e8caa8f15806,first_status_after_checkpoint
+62,883445760,1810957415607ff01fd5b1391834de206d05a752,2026-09-16T12:17:56+00:00,"Update weights & engram (step 62, round 62)",b1b52aa41186f8a4f62dca979d1da86b37a831cd,first_status_after_checkpoint
+63,898158592,ea2bcae817976663d8e6f31d9b5516d79b909816,2026-09-16T14:20:59+00:00,"Update weights & engram (step 63, round 63)",9e40a2bbe3862302186ca75a35473509f27268c7,first_status_after_checkpoint
+64,912740352,a2b63d2b37b34b1238a698cb30a0283e0e34fc2e,2026-09-16T16:23:19+00:00,"Update weights & engram (step 64, round 64)",af513da65f0e3491d2c6cc1d776af6de1f95641b,first_status_after_checkpoint
+65,927322112,fa80b8d3223292083f19ef181f29926dac3c6638,2026-09-16T18:26:14+00:00,"Update weights & engram (step 65, round 65)",5f105960455b5c4f0626f378b24a636ab69e2aaf,first_status_after_checkpoint
+66,940593152,7f4561160e1c639cb053af503776521e6876f09a,2026-09-16T21:44:36+00:00,"Update weights & engram (step 66, round 66)",64d9f92dac1e94d942903353352b909e5004c76d,first_status_after_checkpoint
+67,955174912,485eba2136dd8a58b15a9296688726530d7c986f,2026-09-16T23:46:56+00:00,"Update weights & engram (step 67, round 67)",41f838fc8953c920e28e3adbb23f1f2c6d94df22,first_status_after_checkpoint
+68,969756672,28110a7b1582dd830b86508c87c3f39daf54e02d,2026-09-17T01:49:19+00:00,"Update weights & engram (step 68, round 68)",33b0b03d47905fb851434ecbc259032c2f1dc418,first_status_after_checkpoint
+69,984469504,932290ffd75586658dca9ac944e8edb525131871,2026-09-17T03:51:45+00:00,"Update weights & engram (step 69, round 69)",c9019e7ad7cee299892738158fc861286709aaf9,first_status_after_checkpoint
+70,999182336,32fd674975e01c5c41122094192f5767f99f05bc,2026-09-17T05:54:07+00:00,"Update weights & engram (step 70, round 70)",21910c6391c4e1a7db88b16bb8ed33f45a38a783,first_status_after_checkpoint
+71,1013764096,cc5458039a6e121d9a48c61fa07eaf1dd587e657,2026-09-17T07:56:26+00:00,"Update weights & engram (step 71, round 71)",9fde719da136f93f349d9870678203e8d5b2ccc5,first_status_after_checkpoint
+72,1028476928,1d21787323d7e9635e10c53aab51fc35990cb8d2,2026-09-17T09:58:43+00:00,"Update weights & engram (step 72, round 72)",0d9129553a90d0c4628051b5a92dc87b911ec385,first_status_after_checkpoint
+73,1043058688,13f1b70f96394fe3188718b5bab86b4455d0a0cb,2026-09-17T12:01:02+00:00,"Update weights & engram (step 73, round 73)",194bb306f5ff3cd95121206b257dec9411bda7d5,first_status_after_checkpoint
+74,1057640448,67526fb5bd1625b419802b88f881fd460aff5d3a,2026-09-17T14:04:07+00:00,"Update weights & engram (step 74, round 74)",e219f7ac4a4ac27345541ee180baaa0501c2a5ed,first_status_after_checkpoint
+75,1072222208,783eb10b123d38c954c00de3a6be29f75154f970,2026-09-17T16:06:22+00:00,"Update weights & engram (step 75, round 75)",3fcff1fdddab41a08119fe4d5aa9e9c8036eec3b,first_status_after_checkpoint
+76,1086803968,600561c4f253d39a31f379a22bea665156945fe3,2026-09-17T18:09:25+00:00,"Update weights & engram (step 76, round 76)",12c42018221bbdbc76a4cb173fb474d47d19f255,first_status_after_checkpoint
+77,1101385728,fb43c32895cb806e660973843f36f0b4995c7a55,2026-09-17T20:11:55+00:00,"Update weights & engram (step 77, round 77)",ffd80930b675f5b2d973367819668b5c76bcf53a,first_status_after_checkpoint
+78,1115967488,9cc95e57a37812e76ea74a86190306858aa04b1b,2026-09-17T22:14:20+00:00,"Update weights & engram (step 78, round 78)",8b98eab64afa037946ac3a2c7dbd9ff9572c688f,first_status_after_checkpoint
+79,1130549248,54d174341ed5915478192c1c0916e87c09884a51,2026-09-18T00:16:48+00:00,"Update weights & engram (step 79, round 79)",17a64f4006fbe5061bf6db57c661906077621614,first_status_after_checkpoint
+80,1145262080,e434173700513d85ba4e80c2068899230603b0e1,2026-09-18T02:19:05+00:00,"Update weights & engram (step 80, round 80)",cad99c598f5dc13b6e3ec6c48cc3d0f7be5687a1,first_status_after_checkpoint
+81,1159974912,573e759908a619e562e9b226252d0cae3b18e558,2026-09-18T04:21:24+00:00,"Update weights & engram (step 81, round 81)",1208731495c359c7bea9627978786a4096f6f0d2,first_status_after_checkpoint
+82,1174683648,3d4406c365b22cb26e299ded6baa16176cca1206,2026-09-18T06:23:51+00:00,"Update weights & engram (step 82, round 82)",3befec88242e1abfec723127e731595c91061e05,first_status_after_checkpoint
+83,1189265408,cd6c42488e37a55b93d35a6464556f0003ab57e9,2026-09-18T08:26:49+00:00,"Update weights & engram (step 83, round 83)",75c3f78cbdc183c85579b8b99b51e92a11407063,first_status_after_checkpoint
+84,1203978240,a4e7573d811043f33402c223fb5ae38a142a023f,2026-09-18T10:29:47+00:00,"Update weights & engram (step 84, round 84)",777446793cbcfd026b96aff438adc626d6f07ffe,first_status_after_checkpoint
+85,1218560000,02f1247240bc929663e0b99023ce0a579d8ca55d,2026-09-18T12:33:58+00:00,"Update weights & engram (step 85, round 85)",26afcade1b58eb1a8789fe070178691d87124d40,first_status_after_checkpoint
+86,1233272832,666d831add3653441dad8156355b431c24563ef1,2026-09-18T14:36:16+00:00,"Update weights & engram (step 86, round 86)",fcdd4e36a69db0ee87d57930a21845a07b22eeb6,first_status_after_checkpoint
+87,1247854592,7d3d53fd1dfc7d48d5e4aff425dd4065bf361dc4,2026-09-18T16:38:45+00:00,"Update weights & engram (step 87, round 87)",ec1669916e0d50db87857827c98b9845b6093ae0,first_status_after_checkpoint
+88,1260437504,043399da08024c79538c2cca3b84e5216693880a,2026-09-18T18:41:03+00:00,"Update weights & engram (step 88, round 88)",7b60aad0fc4dc5fd8b4bd98f768b7b7a2a60755d,first_status_after_checkpoint
+89,1274494976,e6514aa4e2923defe7f8e8d49cfe16df027e48d3,2026-09-18T20:43:38+00:00,"Update weights & engram (step 89, round 89)",820e32f9128f4c789276000bd103f8821253086c,first_status_after_checkpoint
+90,1288814592,507a2478d6caf06d5f323d5bcaeb650a6a4d62cb,2026-09-18T22:46:08+00:00,"Update weights & engram (step 90, round 90)",4092ae2888903eb7ceeafc6884a3221e5afad76b,first_status_after_checkpoint
+91,1303396352,4d33fe7a085df7e78538dfc92dac9ea523c0e689,2026-09-19T00:48:29+00:00,"Update weights & engram (step 91, round 91)",1e055a77c32b3f6a94000c22077210a5233c466a,first_status_after_checkpoint
+92,1317978112,f4cba6a340921451269078dbb4dba5c78df042f1,2026-09-19T02:50:56+00:00,"Update weights & engram (step 92, round 92)",d4f7c25e88a6a60efdf99419ae2961fb0ec81250,first_status_after_checkpoint
+93,1332559872,e2c4ce7d5bdf3d50cb4ef5fac757ca918bd455b2,2026-09-19T04:53:27+00:00,"Update weights & engram (step 93, round 93)",70a5665deadbf1c5a8b17f1dbdf5792e4b9020f2,first_status_after_checkpoint
+94,1347141632,d682d3c7899a4f6ace9d2aba9f01476d9521d30d,2026-09-19T06:55:50+00:00,"Update weights & engram (step 94, round 94)",65616aa2cb7ed8a3ef388f7128328ca051a49fc5,first_status_after_checkpoint
+95,1361592320,8efa6e7b11c6a790a87fe99b7b103f16e279b4fd,2026-09-19T08:58:06+00:00,"Update weights & engram (step 95, round 95)",290a5d7094ea5ae587351465a1f3f6501ace8c84,first_status_after_checkpoint
+96,1376169984,5610f93be5469e8d8e78b8ccc621679296870666,2026-09-19T11:00:29+00:00,"Update weights & engram (step 96, round 96)",cd485c26cdd51bd32ffb49960a0cc719fab6d13f,first_status_after_checkpoint
+97,1390620672,9d65d32900fea7ef2089489de52026b6707fe103,2026-09-19T13:02:52+00:00,"Update weights & engram (step 97, round 97)",670c49db2ca2c50260c782580ceed08d1a987dec,first_status_after_checkpoint
+98,1405071360,813951e3b06f05343645d540bcd04d58f0cccfcb,2026-09-19T15:05:48+00:00,"Update weights & engram (step 98, round 98)",f0f58255f12a362f10bd32d5133a9d2500ebeeaa,first_status_after_checkpoint
+99,1419653120,1c9d0afe6d82133532c830891893cc0002d1f597,2026-09-19T17:08:16+00:00,"Update weights & engram (step 99, round 99)",e17d8772428ddf7c55b56d86b2dce3c3171fbc4e,first_status_after_checkpoint
+100,1434234880,d7e191edb2f621a54a88a49a812b5f7145a14834,2026-09-19T19:10:47+00:00,"Update weights & engram (step 100, round 100)",e227911977832a8adac88d32b090a4a98ebc6fc7,first_status_after_checkpoint
+101,1448947712,c01a725e03b047235c7843209c3738902c02f4d3,2026-09-19T21:13:10+00:00,"Update weights & engram (step 101, round 101)",782265a19dccfb469472a551d47cf7040c2a8d93,first_status_after_checkpoint
+102,1463529472,e530ce8c98f09c3fdec32ccb3146829d2b5e6c54,2026-09-19T23:15:48+00:00,"Update weights & engram (step 102, round 102)",c42e920689549494879df2a0e1713fddf7cd636b,first_status_after_checkpoint
+103,1478111232,7ee308974837b26fecc9e9a4af565398a977b687,2026-09-20T01:18:15+00:00,"Update weights & engram (step 103, round 103)",a86ec5e4a2c9e616ff3eeead09d760785ac3c992,first_status_after_checkpoint
+104,1556951040,8749d0724f56213db1224d27f3bb8467c95c13da,2026-09-20T05:23:18+00:00,"Update weights & engram (step 104, round 104)",c39facb1fd913d18c33934e1b3d979347bfd4127,first_status_after_checkpoint
+105,1586241536,8e8c29d99f0e031ba388229738e96010fa2357eb,2026-09-20T09:50:42+00:00,"Update weights & engram (step 105, round 105)",bf4a9df08ed660622ac6921543d605652e9fb17e,first_status_after_checkpoint
+106,1600823296,fbb8cc6ec228cb2b5a95371886d998d03e1ac85a,2026-09-20T11:53:04+00:00,"Update weights & engram (step 106, round 106)",7e14f164aa75b37fa4d48239f37320646ea5c97e,first_status_after_checkpoint
+107,1613275136,3d5b01e3828e5ec76e114d8b4e85abebf0d02413,2026-09-20T13:55:07+00:00,"Update weights & engram (step 107, round 107)",4763413e9860921ecaf4eda37639974d20f290df,first_status_after_checkpoint
+108,1645592576,74e82a08de58dacb368d0303035c1e477ca4f92f,2026-09-20T20:41:43+00:00,"Update weights & engram (step 108, round 108)",d4ed28623aab7f9c40f7a0f594e0b41e04cc42cc,first_status_after_checkpoint
+109,1677950976,f15ac173ea49603516a3eb333d207e0b313039f7,2026-09-21T00:44:45+00:00,"Update weights & engram (step 109, round 109)",d720293ce19b1c4cce47e4c092a486d3b2ce5836,first_status_after_checkpoint
+110,1710243840,5ecc09eebde831c6892f25cd330fb9475fed3453,2026-09-21T04:47:45+00:00,"Update weights & engram (step 110, round 110)",0fba30c3419a9d0f0e6f965e9dd611db988d1351,first_status_after_checkpoint
+111,1742569472,f04470177dc596ffe39220c640827a5c9d3ff56c,2026-09-21T08:51:07+00:00,"Update weights & engram (step 111, round 111)",468bf5ef420e3da3b966ec9ed9d21094a6860df9,first_status_after_checkpoint
+112,1774862336,b1e3456d2145b9a44896a2db42ce86c7145d3112,2026-09-21T12:54:08+00:00,"Update weights & engram (step 112, round 112)",1c7e41460a586cbd2a8def503ef8a5a4ffcac388,first_status_after_checkpoint
+113,1806655488,ace04dc507d22029424cf866221cb79d5df60152,2026-09-21T16:57:25+00:00,"Update weights & engram (step 113, round 113)",09cb7e7aeb6879c418eb5fc3ba79b875f4ea82f5,first_status_after_checkpoint
+114,1838493696,853090669b6df9f72e907e5e865c6d141a17298a,2026-09-21T21:00:44+00:00,"Update weights & engram (step 114, round 114)",c3e9d933f96c3f750d0c6af9b98145820be4476c,first_status_after_checkpoint
+115,1870249984,1b9a30ea29696154b558310feb153a452f5bf9fa,2026-09-22T01:03:53+00:00,"Update weights & engram (step 115, round 115)",f0c97ebdce19acc31a8f72567a64f54cfb33a325,first_status_after_checkpoint
+116,1902059520,8cfdaeb1e38ce27f75a56184bcf829b12595f32d,2026-09-22T05:06:58+00:00,"Update weights & engram (step 116, round 116)",dfec17c8a4f37abd8a22e520453a2521ac084065,first_status_after_checkpoint
+117,1933885440,f8ebbc427fa1c5d1dea3c85c42a680cc8e11388e,2026-09-22T09:10:07+00:00,"Update weights & engram (step 117, round 117)",278095671b694ebb5c126691d5aebb54ebcee3cf,first_status_after_checkpoint
+118,1965543424,a3749a86b1444e54986f2a03725a6d760e428507,2026-09-22T13:13:38+00:00,"Update weights & engram (step 118, round 118)",5c1f968ce6b18603b12254dd674d47648772b9bb,first_status_after_checkpoint
+119,1997250560,08f662cf6768cea988a6a5f78f21211fa048093a,2026-09-22T17:16:46+00:00,"Update weights & engram (step 119, round 119)",dce258d9167bb5fd23859ed35f1549500f3ab6e0,first_status_after_checkpoint
+120,2029072384,400390a416040871bd184b56955d66fc8f28a9b6,2026-09-22T21:22:34+00:00,"Update weights & engram (step 120, round 120)",c6cc7e04f9ce2ec6b7f031c6a4f5fc727c92ed9d,first_status_after_checkpoint
+121,2060947456,28fed9537b034a9898c78e95ff101d15d4fe714b,2026-09-23T01:26:04+00:00,"Update weights & engram (step 121, round 121)",069a858eb3acecab51419623d50877c326f18a4c,first_status_after_checkpoint
+122,2092724224,989316817d04a91f646bb7afb018555ed74928c4,2026-09-23T05:29:08+00:00,"Update weights & engram (step 122, round 122)",5f85ffa5c7228e918bddb45593c425dd7ba3b622,first_status_after_checkpoint
+123,2124451840,aeffc9cf47647c76adf73aa41372cb826ae4e8f6,2026-09-23T09:33:04+00:00,"Update weights & engram (step 123, round 123)",b1c4b45fcd7d46b8ab035ce1c34129d3c703766a,first_status_after_checkpoint
+124,2156285952,ef535b9880698e9cf05ed8c95e23810312b4cfaa,2026-09-23T13:36:14+00:00,"Update weights & engram (step 124, round 124)",53035106274eb0cdd922dba4b983c8e0377bed6d,first_status_after_checkpoint
+125,2188062720,f7bfb56fe1a30a0030ec91fb940f85527ca9ca56,2026-09-23T17:43:57+00:00,"Update weights & engram (step 125, round 125)",aa1cfc5608a1d13a2837db420be625116c491f49,first_status_after_checkpoint
+126,2219847680,c08054d4fdc3dc7cfca497b7bad2d18c29eff85d,2026-09-23T21:47:18+00:00,"Update weights & engram (step 126, round 126)",76a2132fd64dcb254df962ba59ac094f3475323e,first_status_after_checkpoint
+127,2251661312,15a95400ae4eb8f5a4fe521bb753dff541c02c72,2026-09-24T01:51:05+00:00,"Update weights & engram (step 127, round 127)",06c0d1d28c195cac46500913630487d2a0bea735,first_status_after_checkpoint
+128,2300379136,13d5133df4801128862f5039b8f8355366a9af69,2026-09-24T15:42:49+00:00,"Update weights & engram (step 128, round 128)",3917be2571ed06bee07f38ece6cc84823d511acd,first_status_after_checkpoint
+129,2332336128,74b3c46b9242a86ee1cb3a380aa791033dd0ab28,2026-09-24T19:46:11+00:00,"Update weights & engram (step 129, round 129)",cbab8b46411726f89c1729176cf5b6f77b369c49,first_status_after_checkpoint
+130,2364260352,94df66a17529f9d3c89bd7810e5186405c593217,2026-09-24T23:49:22+00:00,"Update weights & engram (step 130, round 130)",9950e3df487f0dc9046f3cc1e0b16cab09c5f8f5,first_status_after_checkpoint
+131,2396168192,51201da7c1beca10e455a301d70788af29abaeee,2026-09-25T03:52:29+00:00,"Update weights & engram (step 131, round 131)",712d2e5c736e92626ecfe53d50bf0aa9f89824e1,first_status_after_checkpoint
+132,2428162048,ac60b92a20e54ed62d9530095e4d4e27a652f749,2026-09-25T07:55:21+00:00,"Update weights & engram (step 132, round 132)",d4402bbe2b54f70067fba2821d2990fe78274766,first_status_after_checkpoint
+133,2460135424,f90dd46ea258e3b077c29c946f6096c5f1fb044a,2026-09-25T11:58:23+00:00,"Update weights & engram (step 133, round 133)",dda5f909d30a4481633fa9ff42fc039d7809eb61,first_status_after_checkpoint
+134,2492153856,c798086e2fdb67b98a25b121d2f3df157e1fa1fe,2026-09-25T16:01:26+00:00,"Update weights & engram (step 134, round 134)",ca7b34f71d3f6f731ab0001b83d7782964cc7858,first_status_after_checkpoint
+135,2535370752,555f4daff977d6977bb88ee099fd9fa88d59808b,2026-09-25T23:30:55+00:00,"Update weights & engram (step 135, round 135)",7efbe66ee9a66f70501ab15e5d581bb70cc01cff,first_status_after_checkpoint
+136,2567360512,780a25d3a15dbf68dfb1d4b6fd0680a351524b71,2026-09-26T03:34:04+00:00,"Update weights & engram (step 136, round 136)",32a4d3b1838ab667471cefb3e4fd02fccdc52f94,first_status_after_checkpoint
+137,2599391232,21d8cce6b233c4061335b12369d55e3ab5bfa9e7,2026-09-26T07:37:02+00:00,"Update weights & engram (step 137, round 137)",feaf7841d5d3114aac3ac8affc1f8c19734601f2,first_status_after_checkpoint
+138,2631352320,8a6eaad300159302ee97e4221865c8771337ff53,2026-09-26T11:40:06+00:00,"Update weights & engram (step 138, round 138)",4a0fa0546cbb2ba007ec933cd3e48844880648ce,first_status_after_checkpoint
+139,2663325696,567a45c6923e1b1a49477dae576e57ce4caf8ac2,2026-09-26T15:43:03+00:00,"Update weights & engram (step 139, round 139)",dc5f9252265ff8f06389c40098a4774e2f5432e7,first_status_after_checkpoint
+140,2677301248,43a63fda41c8dd1176013f7a848d80d5dd47642c,2026-09-26T19:45:36+00:00,"Update weights & engram (step 140, round 140)",25272fa96cab0a8993ed46183977b0bbc3ca0c78,first_status_after_checkpoint
+141,2709229568,4762ee049aa0aac8df0d555d28ea4ac087cf5ec2,2026-09-26T23:48:36+00:00,"Update weights & engram (step 141, round 141)",d9d35734ecbc8c70350e6a6b8fd199007fbde104,first_status_after_checkpoint
+142,2741575680,afab0f11c9579dacf742b1a9350c31c6dd10283c,2026-09-27T03:51:45+00:00,"Update weights & engram (step 142, round 142)",5b78a47ae1f95636afbe6634d244f7b9d0d43663,first_status_after_checkpoint
+143,2773917696,a876326045f52963457357c4a7c5407e418b731c,2026-09-27T07:54:58+00:00,"Update weights & engram (step 143, round 143)",73c82574b172374d0b26e8f91800ff315e1f9d65,first_status_after_checkpoint
+144,2803720192,d22c422c8b132e83ac0ce8f4570cc964580deefb,2026-09-27T11:58:17+00:00,"Update weights & engram (step 144, round 144)",d23e4dacf7f48e11e7824e1cd2bd0d75c46a9810,first_status_after_checkpoint
+145,2824228864,5342d9d099d85f5178902ce5c7245b8f29d22dbc,2026-09-27T16:01:12+00:00,"Update weights & engram (step 145, round 145)",4ec8f62f68e6040509cb132f4d1acbd0c4a3d3fc,first_status_after_checkpoint
+146,2855374848,5f99ab45c989f9368b5f602fe59c88aaf21e650d,2026-09-27T20:04:09+00:00,"Update weights & engram (step 146, round 146)",99f720bb97c1e98d2b6b307950e25add6ff8bb9b,first_status_after_checkpoint
+147,2886307840,0d3d44dae1b83b4432ee23bf436bc62fb3dde942,2026-09-28T00:07:13+00:00,"Update weights & engram (step 147, round 147)",bdea4740f7e97d64a477d7542dba95c79b7bfa01,first_status_after_checkpoint
+148,2917302272,7c98554f23c1e9777fe707ce1c2aa8be4a5a4331,2026-09-28T04:10:19+00:00,"Update weights & engram (step 148, round 148)",6501e020b8cf6e3b27385d991ebcb5e756045e39,first_status_after_checkpoint
+149,2948243456,f35fd4324c11509054056e6058a4e624c5afe35c,2026-09-28T08:13:15+00:00,"Update weights & engram (step 149, round 149)",9fda7a345108f4decdc49af5a1b49c47482cd86d,first_status_after_checkpoint
+150,2964361216,02b6272f32f977ed32fd3492a4e7707d904db58d,2026-09-28T12:16:03+00:00,"Update weights & engram (step 150, round 150)",6c1e6b44b70a2381681c3158b6a6a289a4db344c,first_status_after_checkpoint
+151,2994577408,c2314a96480202648bd7c4ad8d5addd01b89affc,2026-09-28T16:19:03+00:00,"Update weights & engram (step 151, round 151)",beaf675650a926fc8766e922946bc4a2cb426392,first_status_after_checkpoint
+152,3021451264,eb43b7e52ff2709166f177bdce3be109e0818f26,2026-09-28T20:22:01+00:00,"Update weights & engram (step 152, round 152)",50e93ffb80ca487d3e3c8aec99576ba22451289f,first_status_after_checkpoint
+153,3048321024,52becfc98d80a803bf4ad992776fb7eca29ca2fc,2026-09-29T00:24:54+00:00,"Update weights & engram (step 153, round 153)",16414958ac5073ed7dc93bbf03435449c2d198a1,first_status_after_checkpoint
+154,3078135808,3223b40cb93c6acfa7dd06a87b791d09aedb9bf0,2026-09-29T04:28:00+00:00,"Update weights & engram (step 154, round 154)",da4ce9f2de739ac4ee7dc71d06cfdcaf393373d7,first_status_after_checkpoint
+155,3088887808,fda96cd9ae86beb072ecebc69adaf39e56ad4db2,2026-09-29T08:30:27+00:00,"Update weights & engram (step 155, round 155)",2fb28c2fe51704587fa022b93ef6c41964eba642,first_status_after_checkpoint
+156,3111481344,0780f6a3cae0bfa9fd00f5800cc614b56f4a1d0c,2026-09-30T00:36:19+00:00,"Update weights & engram (step 156, round 159)",9bf10231bb891ffe3adb8bd50cf83160f3a73bc5,first_status_after_checkpoint
+157,3120926720,4532e5e84be483d90dfb169d66f9b44ff3f3817d,2026-09-30T12:40:45+00:00,"Update weights & engram (step 157, round 162)",228b180e591f42c01567a148b34334dbf76d00f5,first_status_after_checkpoint
+158,3143536640,b146a46796c58fe92e81070571eef4fd1c21cd7d,2026-09-30T16:43:30+00:00,"Update weights & engram (step 158, round 163)",d986ed72a2510bc398ac36d204cff6c74017ba74,first_status_after_checkpoint
+159,3179638784,7f725ec07d7e3fcd15a2f7c107d3ded2247a7e2b,2026-09-30T20:46:32+00:00,"Update weights & engram (step 159, round 164)",550aca831c342d92fa17a62d780e1e1a64b6895c,first_status_after_checkpoint
+160,3213070336,5a91f024270fa913e5293584f169aeb61f58c0b4,2026-10-01T00:49:46+00:00,"Update weights & engram (step 160, round 165)",aed5b6555c2f3c0473617c659e86a2d10e8d80ed,first_status_after_checkpoint
+161,3245035520,898e43d913c08b116005d3b9a8b5993e9fac45c2,2026-10-01T04:52:52+00:00,"Update weights & engram (step 161, round 166)",91378b51407f3753357b660b577e43efdb3ca3f9,first_status_after_checkpoint
+162,3276742656,e54cf8209231515a18271ec7f4d4b523884c63af,2026-10-01T08:56:00+00:00,"Update weights & engram (step 162, round 167)",3e5f9b4a0b208f8f384aa2a026d67960e0d1f52e,first_status_after_checkpoint
+163,3308417024,177a2cac7c9d2af7dc30168247d8f1a4effe6a39,2026-10-01T12:59:04+00:00,"Update weights & engram (step 163, round 168)",e7233cc4f56aeba5a2d0078da2e61a9003c7551a,first_status_after_checkpoint
+164,3340578816,319238347c9db79e3f7410a9ffc7668a6ae32a51,2026-10-01T17:02:07+00:00,"Update weights & engram (step 164, round 169)",5d0676389977552b995b48e438639397d7047df7,first_status_after_checkpoint
+165,3412811776,7e651e4e7acd727ca45b8d8c0cea90ccc7799d9c,2026-10-02T01:07:26+00:00,"Update weights & engram (step 165, round 165)",1b658b8abf1cf3da9018c5a2aab385cd63826b1a,first_status_after_checkpoint
+166,3448885248,53669feecfeaa5b9703865dc4aa80e6f03fb6968,2026-10-02T05:10:36+00:00,"Update weights & engram (step 166, round 166)",ef1fb2dd41154e5f6021e2a6aeeac7f6d64800f8,first_status_after_checkpoint
+167,3485003776,f3c7703e48f405ce15bbedd751ab6928bd4c9d20,2026-10-02T09:13:36+00:00,"Update weights & engram (step 167, round 167)",4fdd04591c7037482555576b32a11f7bb1aa043d,first_status_after_checkpoint
+168,3556429824,1126136a3d8b3d61dd9fd0147fc67d4a0c618336,2026-10-03T15:31:11+00:00,"Update weights & engram (step 168, round 168)",d01db614f0f91e764ad73c588d896beaee557a65,first_status_after_checkpoint
+169,3588263936,7481da32df69dcffe8d49eca6277d0f2eb0f7405,2026-10-03T19:34:11+00:00,"Update weights & engram (step 169, round 169)",17b0d1679f7b03522e8e62c146f2f01bd0bb21a5,first_status_after_checkpoint
+170,3604410368,0ad8aafe712293632959f6a4167064d1ac61795e,2026-10-03T23:36:47+00:00,"Update weights & engram (step 170, round 170)",2ca9666e4e1a3be0201202fedddfcf1ee3f2d6ec,first_status_after_checkpoint
+171,3660140544,f7a65f89a660927bd1c397e264bc1c4e1153bd4d,2026-10-04T11:41:06+00:00,"Update weights & engram (step 171, round 171)",5877b3a5cf63ad474f8f0438d90f6af31905ee29,first_status_after_checkpoint
+172,3693490176,84e48600f3aad5107ecaba7c04a660690d2306c5,2026-10-04T18:51:10+00:00,"Update weights & engram (step 172, round 172)",b9e749c2076bb97f4858c3382de68e6d77812992,first_status_after_checkpoint
+173,3727622144,c2fa4696d1410f9c7b5e8624d7586e36e830f033,2026-10-04T22:55:01+00:00,"Update weights & engram (step 173, round 173)",d908e5820d42f1b1083d79945edd2a26fea86823,first_status_after_checkpoint
+174,3796688896,1f601db833f2e19a18e14e4ef171084bcaf8073b,2026-10-05T18:16:49+00:00,"Update weights & engram (step 174, round 174)",1ea5cdbb7e39ce3cd2e66e387588b8ed4966eba8,first_status_after_checkpoint
+175,3830505472,4a48571509356430ec46d7b2c4245f1516dec4b1,2026-10-05T22:21:05+00:00,"Update weights & engram (step 175, round 175)",1d9852a5cbea104998744f15c68c46a8bc92c01d,first_status_after_checkpoint
+176,3864694784,ebd01521d49ee50293fb39a191d97059614155bb,2026-10-06T02:25:16+00:00,"Update weights & engram (step 176, round 176)",0978b0e7de20972a8cc673fba759a212c0bf0c46,first_status_after_checkpoint
+177,3898740736,425edfcb5681372153286b1c8f460df21d85db78,2026-10-06T06:29:26+00:00,"Update weights & engram (step 177, round 177)",06bbfb09eadf26dc021751abf3d338e9f0037089,first_status_after_checkpoint
+178,3932499968,9700a2b80537a258b9157b8330affcda3133b51e,2026-10-06T10:33:25+00:00,"Update weights & engram (step 178, round 178)",a7dcb061939b4c3c892de17352e13776e0a41813,first_status_after_checkpoint
+179,3966287872,0d3cb163595d1cf5877b0dcd648c6bdc8ba3ab50,2026-10-06T14:37:31+00:00,"Update weights & engram (step 179, round 179)",94c734ed7199a8f42d1edc5141309fb63a96a2e3,first_status_after_checkpoint
+180,3998969856,e795b089e4c68af025b483642faedb39b1f0d890,2026-10-06T18:40:50+00:00,"Update weights & engram (step 180, round 180)",9c14bb94340e90321d4ff37f0e72cfdaf1c894df,first_status_after_checkpoint
+181,4031418368,30ae15e3b6cbfd9baf4a352b8fa9abf2289faefd,2026-10-06T22:43:56+00:00,"Update weights & engram (step 181, round 181)",61ba7640cb513197d0889be83c29b84a290ec070,first_status_after_checkpoint
+182,4064645120,7d2bdb8b02cd836afd8842bc10261a38e370b445,2026-10-07T02:47:14+00:00,"Update weights & engram (step 182, round 182)",26452215a226c940968353b98c49b1a11321668b,first_status_after_checkpoint
+183,4097867776,77600ffbeb54fe845073e4a0132013dbc44a0c4c,2026-10-07T06:50:37+00:00,"Update weights & engram (step 183, round 183)",b628f73aa9a434ec5ddc2ca9741e2f370e437aea,first_status_after_checkpoint
+184,4130537472,edefb8a21c9bdf505d8c757806b9bebc8e27a25f,2026-10-07T10:53:36+00:00,"Update weights & engram (step 184, round 184)",55ec6e30e29a3dff906fa5c6329e47a07b593b06,first_status_after_checkpoint
+185,4163190784,0f1d03c0d91e2afdbf2a295bb1e126c544b922ec,2026-10-07T14:56:52+00:00,"Update weights & engram (step 185, round 185)",5810c707c59e81c7f6a828b58f7cb12b5a6e3a56,first_status_after_checkpoint
+186,4195627008,86ce8430630217bbb5f36ef7b2e4d4c2fd511f08,2026-10-07T19:00:20+00:00,"Update weights & engram (step 186, round 186)",ce75a454c6587b44f094055df10ad2bb38fe3e83,first_status_after_checkpoint
+187,4228833280,66759dbce2cf3dc388bb6b72b67b2e7d4497bb9f,2026-10-07T23:03:36+00:00,"Update weights & engram (step 187, round 187)",6b308f4ddc680ae26b2ba772ce9fe969377b5e39,first_status_after_checkpoint
+188,4262035456,a9a23956577a322e837321be92e3a48aae46bcdb,2026-10-08T03:06:46+00:00,"Update weights & engram (step 188, round 188)",d29bc963429f4ddf393c3967fb32d16f1bb4376b,first_status_after_checkpoint
+189,4317814784,6cadaadaff476a15cd244d7de9c13b0c28b1fc8a,2026-10-08T13:14:07+00:00,"Update weights & engram (step 189, round 189)",a5fad1fbdc5e568dabcfb2c1ea4d17323a53e1b9,first_status_after_checkpoint
+190,4351746048,a265f5352936e4d082eb945555bbbce3b9b1d35a,2026-10-08T17:17:33+00:00,"Update weights & engram (step 190, round 190)",605e563164a9cef9a7d5308c9192274daa41eb0e,first_status_after_checkpoint
+191,4385751040,2f36495266b05fbe60625d54c44ea177892f4f7d,2026-10-08T21:21:22+00:00,"Update weights & engram (step 191, round 191)",8c5f51eb6a6edd1aac8bab9d3a1b3c10dcc39681,first_status_after_checkpoint
+192,4419198976,6a08403ee9db4f5eac3afbd9e57b5f69439cfc7f,2026-10-09T01:24:45+00:00,"Update weights & engram (step 192, round 192)",53cbd1a6ea58b6a6bb0431213030c73fc6d00b69,first_status_after_checkpoint
+193,4453191680,aa12f5a9c38ec058adf331e0f6c1662402a1fb5d,2026-10-09T05:28:09+00:00,"Update weights & engram (step 193, round 193)",426f138034fafffe4e16d2f4181683917835d0d3,first_status_after_checkpoint
+194,4487192576,735702b5b14dd984a1011412bc07c64ba7b24765,2026-10-09T09:31:25+00:00,"Update weights & engram (step 194, round 194)",5b823216ca975b20bd608f21e798a11824c6446b,first_status_after_checkpoint
+195,4521181184,d4dacd81e5a694666a7fc49e2575f8653260bdb2,2026-10-09T13:35:03+00:00,"Update weights & engram (step 195, round 195)",97c8faf8ca2b818540bf34f2876d261581798e60,first_status_after_checkpoint
+196,4554625024,9848f3092294a8eb648f1fdf4d99f60b9af561c0,2026-10-09T17:38:37+00:00,"Update weights & engram (step 196, round 196)",c5c6a95ef8fcb5d63e04b6dade6d88d1b2e57891,first_status_after_checkpoint
+197,4588597248,879641022342367b27b6aa43bf144f6bc563d3c0,2026-10-09T21:42:19+00:00,"Update weights & engram (step 197, round 197)",c4a90f32c42acc12bcc342b885701e89beef6f00,first_status_after_checkpoint
+198,4622585856,9d9f3a89d2cff5d4e18dfa5931bb4be524c93ed2,2026-10-10T01:45:50+00:00,"Update weights & engram (step 198, round 198)",cc317725d2ed9a925ef534ca2f5f70e161b9d9c8,first_status_after_checkpoint
+199,4656562176,e6e096964fc3096ab63ade5abec9d8576fcc1b4b,2026-10-10T05:49:33+00:00,"Update weights & engram (step 199, round 199)",7849a29222920000bf0c10d94335f65a16ba4cc6,first_status_after_checkpoint
+200,4723970048,5910216b1b1897d61c2b89d3fa4df57748db288e,2026-10-10T14:52:53+00:00,"Update weights & engram (step 200, round 200)",b171933f9046a713e4b90d99bc7d8a3ceb94ba9a,first_status_after_checkpoint
+201,4750532608,ba9bca633b7fa290ba66c4affd27fc9b71758d92,2026-10-10T18:55:48+00:00,"Update weights & engram (step 201, round 201)",3c1aa888049448ce0dedaad8c023abb852a15875,first_status_after_checkpoint
+202,4783796224,4ffba9dd80134af0cdac5098e4c85bb562edb7df,2026-10-10T22:59:08+00:00,"Update weights & engram (step 202, round 202)",a6b17bb1f8f46f602f73ad050f98a244df988793,first_status_after_checkpoint
+203,4818526208,55cf7710f7a674f0ce42217e185f403a1c788e0d,2026-10-11T03:02:19+00:00,"Update weights & engram (step 203, round 203)",96076e44d4a4eba5cbb121ce55f03aec46951a98,first_status_after_checkpoint
+204,4853260288,96f2722c351302c94b69411631ab45c121872d5b,2026-10-11T07:05:18+00:00,"Update weights & engram (step 204, round 204)",9337281d4d47e38c8cb7419151803a55264ffd65,first_status_after_checkpoint
+205,4885659648,570dc5afb71b2998e495ab87d8854caa7be20b1e,2026-10-11T11:08:26+00:00,"Update weights & engram (step 205, round 205)",5b4b1e3532c3b40d4a08ba5f9c297b155fafb797,first_status_after_checkpoint
+206,4940398592,6f15345d620353b2e7bd061aa875b077193fd141,2026-10-13T11:42:59+00:00,"Update weights & engram (step 206, round 211)",c3db11abb189cb3209597938bfc1a33a939c55e1,first_status_after_checkpoint
+207,4973768704,dbf767ab0997f42d747ec717b4ec2c24f436fc47,2026-10-13T15:46:11+00:00,"Update weights & engram (step 207, round 212)",8830eeb58e9a0921c1464448981cf0e2ea60084b,first_status_after_checkpoint
+208,5007142912,bad6fce5347163da52de42ec76a1bc703d4132df,2026-10-13T19:49:16+00:00,"Update weights & engram (step 208, round 213)",0b144d077083b609f4c38bda018bb08c1f2e1191,first_status_after_checkpoint
+209,5039951872,6db348aaf74675e6971372bc8adda06ad37cd2ca,2026-10-13T23:53:13+00:00,"Update weights & engram (step 209, round 214)",b2d75340e60a784b3c18bac5237897e7f12895c5,first_status_after_checkpoint
+210,5073313792,b118d849ff8b7fcf72bef9476bfd30542d2e11b2,2026-10-14T03:56:19+00:00,"Update weights & engram (step 210, round 215)",dcbf0e9744b40aee521ca5969e8d4d7792851589,first_status_after_checkpoint
+211,5106663424,9589904f3b1455bb4d504dfcfc8315efd114afd7,2026-10-14T07:59:33+00:00,"Update weights & engram (step 211, round 216)",63472b1db2d2a1ead0f81351356ff4adc7340fb0,first_status_after_checkpoint
+212,5140000768,7ed5b608f3ca5ad934dbe43e1e97859992a19723,2026-10-14T12:02:40+00:00,"Update weights & engram (step 212, round 217)",e172d580231256e1aeb71beb83a92976d6acfcdf,first_status_after_checkpoint
+213,5173321728,972b8bdac532c414435b62b450ec569996ead86d,2026-10-14T16:06:01+00:00,"Update weights & engram (step 213, round 218)",29391228e9168208d866fe35dad4dd06ea2654c1,first_status_after_checkpoint
+214,5206659072,43fafeb5c09df332ee95c0b21f342d6df639c9df,2026-10-14T20:09:34+00:00,"Update weights & engram (step 214, round 219)",8aa57121e53d2a18fe34104a78e16109e08c99e9,first_status_after_checkpoint
+215,5239996416,b1fca1079bcac1ed1edd9f759ce88f5b2eb0b548,2026-10-15T00:12:53+00:00,"Update weights & engram (step 215, round 220)",919e3112d62383b93d49d678c21cd0ae01b2f2cc,first_status_after_checkpoint
+216,5273305088,5c612f1f911d8ea29857c8a3b15e017742c3481b,2026-10-15T04:16:11+00:00,"Update weights & engram (step 216, round 221)",1ba29064404b74392c15c66e844682c07252d13d,first_status_after_checkpoint
+217,5306609664,7c948ccde9a19e1db558a4f646e4338d727814f9,2026-10-15T08:19:43+00:00,"Update weights & engram (step 217, round 222)",e507d508be3307b13bcfdb922e6c94ea883a4a83,first_status_after_checkpoint
+218,5339910144,c84c43be2f8807bac6291e7de9cb5b09709c9296,2026-10-15T12:23:11+00:00,"Update weights & engram (step 218, round 223)",3d2c875ab583fc6c890c639e9daf76e6e656cbcb,first_status_after_checkpoint
+219,5373198336,d6a3c1f97cf47e42b9bc85f9c5132a3cb636b283,2026-10-15T16:26:21+00:00,"Update weights & engram (step 219, round 224)",848f849116ccbb38489d030eaecb52b824524aff,first_status_after_checkpoint
+220,5406490624,741aa0c06d82574d0fbbbde0571acd2b1c601a06,2026-10-15T20:29:36+00:00,"Update weights & engram (step 220, round 225)",68ed057fbaae9b4eef45dec6ca4b4c73f63fcd4c,first_status_after_checkpoint
+221,5439770624,e6db85b421b380ee852e2d612b79627397eb332b,2026-10-16T00:32:53+00:00,"Update weights & engram (step 221, round 226)",85073b9ad2de911cd420f2e2e8a67aab55418d6b,first_status_after_checkpoint
+222,5473058816,24edf602e05522dee07dceeafd59e0fa30400b39,2026-10-16T04:36:19+00:00,"Update weights & engram (step 222, round 227)",50359bb670574a81affaa82ac4256573eb915966,first_status_after_checkpoint
+223,5506338816,7d23341d7f88f97aa43eb22ce806fdc1f63c4a6e,2026-10-16T08:39:51+00:00,"Update weights & engram (step 223, round 228)",9846a203c9510c3776877e69a3a0299057e1670b,first_status_after_checkpoint
+224,5539614720,e33ba1e1b0f3b59874605b23069e2187da1d257b,2026-10-16T12:43:10+00:00,"Update weights & engram (step 224, round 229)",a5616eab04bb2e30233d42aeb617c02a14eaf5a9,first_status_after_checkpoint
+225,5572886528,28e72ac72b797bcfda7069fd1e16f73b6faeb7aa,2026-10-16T16:46:13+00:00,"Update weights & engram (step 225, round 230)",e6bdd46f6a2c56fe8e50c9f440b4017e9d5e3b84,first_status_after_checkpoint
+226,5603635200,fa6d19a7f91a7a60cf69a936820046da9aa33da7,2026-10-16T20:49:16+00:00,"Update weights & engram (step 226, round 231)",c0b887ef3ec0e66719aea024211004ac30f965e1,first_status_after_checkpoint
+227,5636427776,2de21fc99652eefbd337d35588cbcf3aae196c45,2026-10-17T00:52:39+00:00,"Update weights & engram (step 227, round 232)",9a7f2c00b30c6ba01375c2ab81d08286b6e74657,first_status_after_checkpoint
+228,5670350848,f3550e8afb488447560903a590023bfb640587cd,2026-10-17T04:56:00+00:00,"Update weights & engram (step 228, round 233)",fb23de46b28ecc92eb7f59110b9d171f7152b4fd,first_status_after_checkpoint
+229,5704019968,058314f55cffbd502a19779bd622a627dce24227,2026-10-17T08:59:18+00:00,"Update weights & engram (step 229, round 234)",86528a453bd39e2a879651d1511878a1777bac27,first_status_after_checkpoint
+230,5734019072,5c700cdf19419fce7091ed39a46eee5865fc8074,2026-10-17T13:02:38+00:00,"Update weights & engram (step 230, round 235)",aab820ed39c4c30730f697913ada3246aa624883,first_status_after_checkpoint
+231,5767127040,9140591dd5106e1d4676192f5ede57ddb3143da2,2026-10-17T17:06:05+00:00,"Update weights & engram (step 231, round 236)",d08c69823e3c0ca1e33c731785c59748c6311cec,first_status_after_checkpoint
+232,5777543168,7cdd6d95fe65e97be9aace5a675f9d86dab5fd00,2026-10-17T21:08:28+00:00,"Update weights & engram (step 232, round 237)",b0b4cbc25bf674c9c1eacf5d62b0509b7c2cbaee,first_status_after_checkpoint
+233,5803014144,cf86f63c3db14ea3f06a7fa886605eb50974c5d7,2026-10-18T01:38:46+00:00,"Update weights & engram (step 233, round 233)",a2afa0a7f0e223e5a751ddfd7b95c7372ab8f9b9,first_status_after_checkpoint
+234,5834053632,a6834bb2eadb51e39c76778a53c7ddd08a6f9275,2026-10-18T05:42:33+00:00,"Update weights & engram (step 234, round 234)",55014b7e9c822be91f9a07e00293c25521d539da,first_status_after_checkpoint
+235,5866821632,dd76071d51776d3b16715f6b70358c81ec646658,2026-10-18T09:47:21+00:00,"Update weights & engram (step 235, round 235)",be4eaff475134374a3ac707539a6a0f4e296ab94,first_status_after_checkpoint
+236,5893134336,d1f9c2e4190888aa0e3779d6425e05ed26ada018,2026-10-18T13:50:42+00:00,"Update weights & engram (step 236, round 236)",6307733999b3dd91093ee635310b0f80da1afd61,first_status_after_checkpoint
+237,5913614336,a56bb9972b233ee4004c122886ddcc5ab9c2d8fe,2026-10-19T00:32:06+00:00,"Update weights & engram (step 237, round 238)",a207a15d08870af5fda1a4ebe7362589e3cc083c,first_status_after_checkpoint
+238,5955131392,1a2a481d3274b0f2d3e5212cdc1ed7dfd452c8c0,2026-10-19T04:35:17+00:00,"Update weights & engram (step 238, round 239)",4c90feadc69d57e5b8f3265cee99bb2db4a82953,first_status_after_checkpoint
+239,5996500992,af6eea9c1e07e2c6f147e66d515cf48ce0697bce,2026-10-19T08:38:04+00:00,"Update weights & engram (step 239, round 240)",86e2464dc536ad2de0a7f21d2e26bbf4ad3be81f,first_status_after_checkpoint
+240,6034675712,9c7ab20b923ea832390522516cde89137b1020c8,2026-10-19T12:41:03+00:00,"Update weights & engram (step 240, round 241)",273af08aabf7bbbec4e8b05ba1ee022a3fe75ddc,first_status_after_checkpoint
+241,6062063616,46387a692996413ed0dabcd71d48f707573cff77,2026-10-19T16:43:43+00:00,"Update weights & engram (step 241, round 242)",561c349a05a6b9d695e935b5a96ddfa5ee4521ef,first_status_after_checkpoint
+242,6068813824,98b48ac40c73ead0c86660bd4222d4f0a628c11c,2026-10-20T12:50:19+00:00,"Update weights & engram (step 242, round 247)",11dbd4c896bab0f1e4b29b3446e2adcd94d7ad97,first_status_after_checkpoint
+243,6089719808,e6a4a532b485cec48b885257a43b4bace371334d,2026-10-20T16:52:43+00:00,"Update weights & engram (step 243, round 248)",69c9cefd368be608827c7ed968487e3cc35f1a01,first_status_after_checkpoint
+244,6121209856,7192c9d3718ac98b0b461a1fa157309c5e3619a3,2026-10-20T20:55:12+00:00,"Update weights & engram (step 244, round 249)",69aa5cdd82f0a0b349b0512b4f96a88b10277a81,first_status_after_checkpoint
+245,6161530880,a0d36396780442f0d785a4a3093767b67c0a5cbe,2026-10-21T00:57:59+00:00,"Update weights & engram (step 245, round 250)",b64f1aebe99b632d2bd3002463d51c11eb5d0833,first_status_after_checkpoint
+246,6202114048,79ca67740631f17c238786f0aefe24180ebfc667,2026-10-21T05:00:54+00:00,"Update weights & engram (step 246, round 251)",739cc8daa60ed34a4a10a79504c6157310d825c8,first_status_after_checkpoint
+247,6237929472,0ae57a747b2846bc44f9899c7ddf9153538c05db,2026-10-21T09:03:41+00:00,"Update weights & engram (step 247, round 252)",f35c79be09f0131cf686384681642307b5a93697,first_status_after_checkpoint
+248,6273204224,a8beb8817e0598ee52a4255a9824cd7d174d5961,2026-10-21T17:26:35+00:00,"Update weights & engram (step 248, round 248)",c24ae839d81176b41f784ddb280e0359b0de73b0,first_status_after_checkpoint
+249,6279757824,a42939f7bdd9cec5c12c03d021d22c21b3d4daf5,2026-10-21T21:28:39+00:00,"Update weights & engram (step 249, round 249)",0440c2d1e80b67723e860d721143796c8deb71f2,first_status_after_checkpoint
+250,6324109312,cf12d468f1284f5271085e004b46480011f0aaa8,2026-10-22T01:31:43+00:00,"Update weights & engram (step 250, round 250)",bccb92962c35669dc258e8c4e8a73e8c96cf1e45,first_status_after_checkpoint
+251,6369607680,d5412e6471ddaa3f3015273dca88110cac380243,2026-10-22T05:35:11+00:00,"Update weights & engram (step 251, round 251)",e330b5064ad7a99ca3145e7fbde6c992f47145f1,first_status_after_checkpoint
+252,6415138816,ea9e62c3e73357576832f019e8fff1b877538601,2026-10-22T09:38:25+00:00,"Update weights & engram (step 252, round 252)",8cb431aa9bedef84351f1b2df2a98ca1973ddb1d,first_status_after_checkpoint
+253,6460342272,1d1176fd05d1584eb4a6952904860d86e235e2cb,2026-10-22T13:41:42+00:00,"Update weights & engram (step 253, round 253)",1ecffe76eb4a6993efb796ed28ab05c48afebf0d,first_status_after_checkpoint
+254,6505545728,fe4ef42b3626b492a3c3be78591b065c6d84ed45,2026-10-22T17:45:23+00:00,"Update weights & engram (step 254, round 254)",549d3580853966c059fe5cddf8f49feeaf5bcbbe,first_status_after_checkpoint
+255,6520111104,b0a9243d4e7136cd7a314bef3cf6fecffff841b9,2026-10-22T21:48:01+00:00,"Update weights & engram (step 255, round 255)",5dd7f2a4a09e657f57a66b52bf47d433c7b4f352,first_status_after_checkpoint
+256,6560415744,94036a8182dee74525eb0451d7a985b506591883,2026-10-23T01:51:26+00:00,"Update weights & engram (step 256, round 256)",81eada119cb4b483d9cbbe0d01ed740bfbb2f7de,first_status_after_checkpoint
+257,6601195520,a5c01d36cd9b07cf690dfc0d55168e4d1ea2da5c,2026-10-23T05:54:52+00:00,"Update weights & engram (step 257, round 257)",73c49ab44ef4d2002101436b5023ef27ebbe067d,first_status_after_checkpoint
+258,6641942528,f4cdc09d53abdd4fc5149b01071dbbe2988c4cc0,2026-10-23T09:58:28+00:00,"Update weights & engram (step 258, round 258)",061228b580a4c411b82bcd6b75ef3ca307dcc8e5,first_status_after_checkpoint
+259,6682804224,683ca4b344a4516189f9f6ea42c929e9bb6c55d7,2026-10-23T14:01:48+00:00,"Update weights & engram (step 259, round 259)",b98795e8d806bebf27b92c2f5f334d337baa2cc7,first_status_after_checkpoint
+260,6709690368,4d268ab0a71e43466e18c8034dee9d959d9463d5,2026-10-23T18:04:30+00:00,"Update weights & engram (step 260, round 260)",9e3e6cad9ddd6c645fb831a5ed68416132fe7c6b,first_status_after_checkpoint
+261,6748323840,e3fb3d1481726221f092e26fa5c9d10f4606e16b,2026-10-24T02:08:31+00:00,"Update weights & engram (step 261, round 262)",bc48d12405fd435b8742ed3eba402cfd6ebe9c25,first_status_after_checkpoint
+262,6789677056,40e92f22e494e1486ca58bc7b1b5a6fb29f1a38c,2026-10-24T06:11:54+00:00,"Update weights & engram (step 262, round 263)",4902cb531fd00a650f2ae5bcfc4dad4a773cdd52,first_status_after_checkpoint
+263,6829342720,738c82880e383a34ecd225efb629e2f40de76b4a,2026-10-24T10:15:27+00:00,"Update weights & engram (step 263, round 264)",7437f216781df00e711ea2f09c23adf25a31a97c,first_status_after_checkpoint
+264,6858375168,f766ff05b90697d446de2a41f7be99f5e20a0a38,2026-10-24T14:18:13+00:00,"Update weights & engram (step 264, round 265)",abf95d02690bd53979c24f8c790717f07052d9be,first_status_after_checkpoint
+265,6885343232,5ec37f221e3165228566792aa74e58d38a90b7ce,2026-10-24T18:20:58+00:00,"Update weights & engram (step 265, round 266)",aeb166830aafea04479e3cd25bdbbbdf427aba1c,first_status_after_checkpoint
+266,6925434880,7b8b540047186cfa14077d3452e1e9163bda0602,2026-10-24T23:35:06+00:00,"Update weights & engram (step 266, round 266)",af0cd68392e82060f21a9dee25421a87095ed4de,first_status_after_checkpoint
+267,6966853632,00daab92deed1675dea3c039e38a939a46ce03f0,2026-10-25T03:38:48+00:00,"Update weights & engram (step 267, round 267)",4f834840916be18f4ee8d87ca7153aac010c78af,first_status_after_checkpoint
+268,7008468992,6ac006f8c3431a1414ba794baaaf2664d9b76f8a,2026-10-25T07:42:32+00:00,"Update weights & engram (step 268, round 268)",5e3d485c3dd5e10948318c6f1ec66a9ccf90555a,first_status_after_checkpoint
+269,7035207680,f48d1c17d97c44c3007158e52a5c1f3962e9e5b9,2026-10-25T11:45:24+00:00,"Update weights & engram (step 269, round 269)",3baf50095b8dbbcd3146e2d4b2ef34743c7e27ea,first_status_after_checkpoint
+270,7057539072,f410f95c0314cba7578bb5b61401c767494fd71b,2026-10-25T15:48:15+00:00,"Update weights & engram (step 270, round 270)",98b456cfabe341a80fe6352eeb0ad1e7936eab2d,first_status_after_checkpoint
+271,7114080256,1d4a8e987f151fd67611e43f6bf9f94379dc0882,2026-10-25T19:52:45+00:00,"Update weights & engram (step 271, round 271)",305a21b257879584a4a1ed580ab04cfda4bfe3b9,first_status_after_checkpoint
+272,7283113984,a40ab7268135f1db960ebb63e09a4a3bdfbe7b89,2026-10-25T23:57:50+00:00,"Update weights & engram (step 272, round 272)",56475e65f5880136da811b5134fb1065f66f8d8b,first_status_after_checkpoint
+273,7576950784,c9674359e60d23823ef50fb8fe87be014adb2d5b,2026-10-26T13:05:30+00:00,"Update weights & engram (step 273, round 273)",9ebdea090c1f4284910a38a8dcb53bf88fc13361,first_status_after_checkpoint
+274,7791280128,336664aca7ade7754d92d0dc42796f23e08b21fd,2026-10-26T17:13:11+00:00,"Update weights & engram (step 274, round 274)",a0b8973189eae08f0c790ea63c27afc3952f2ac1,first_status_after_checkpoint
+275,8185839616,ceb4dfb7bd22cc262bf8ac43095b16a5c9578d8f,2026-10-27T00:07:18+00:00,"Update weights & engram (step 275, round 275)",320b72bc84dd94902823aac0f060d7e91c2a758c,first_status_after_checkpoint
+276,8447221760,54993664f136a7466aa5208afdaac52eb63a0511,2026-10-27T04:17:44+00:00,"Update weights & engram (step 276, round 276)",ab8d403cbea7553154106bcd99c424d787707179,first_status_after_checkpoint
+277,8602750976,07fe5532a837e2f91a6a8f7eebe7f809d5e7c848,2026-10-27T08:23:19+00:00,"Update weights & engram (step 277, round 277)",bc8d89b1e57a849d3516c5a601a4ffe184f2cfb9,first_status_after_checkpoint
+278,8791238656,4617b9699e56579338b0cd60bf71cfda05a17766,2026-10-27T12:35:02+00:00,"Update weights & engram (step 278, round 278)",676bfca80a42cc9ac82055e4a42fd6f7ad95c8f0,first_status_after_checkpoint
+279,9045549056,5bf003c90f00a8a873b885c7eeced5d5d035ce6c,2026-10-27T16:48:00+00:00,"Update weights & engram (step 279, round 279)",b89e6edcf8c7d8e691147565abf91309d1dda039,first_status_after_checkpoint
+280,9059227648,9da214e3e5a69f4eeb2009d4005b8f1611d5110b,2026-10-27T17:41:20+00:00,Update step 280 round 281,c6759af97e1e9613993fad6d4ad657c70a58fac1,first_status_after_checkpoint
+281,9073518592,febd2f5f8ac19362c756d6faeded1ab0966ecdf7,2026-10-27T18:24:41+00:00,Update step 281 round 282,8e52f4ea7d89e8766956793442515960e0967787,first_status_after_checkpoint
+282,9088561216,eda6237e9388bef96c562ffd48ea86f90e258829,2026-10-27T19:15:30+00:00,Update step 282 round 283,ec3c7d5acb70c74bfecc012a354a52e3c4a671cf,first_status_after_checkpoint
+283,9102577728,597e723097eaf91eed4af8099618bb663aaca37b,2026-10-27T20:00:57+00:00,Update step 283 round 284,58130a2dfccfb0bd8d9a80b663f6c5787a0fb314,first_status_after_checkpoint
+284,9105025088,6152d56f2558b3c31be4235b20f2cc306c980a72,2026-10-27T20:14:42+00:00,Update step 284 round 285,69e6a10a83cf4908fb8542e92239ea94f0832bba,first_status_after_checkpoint
+285,9106483264,33488724d94d70bff62313ed58f4d985a3912902,2026-10-27T20:23:03+00:00,Update step 285 round 286,3f2c8c9fb9b0705114a9b6977de718b49ae62515,first_status_after_checkpoint
+286,9112363072,bc9f108b307194214ecd81d8aa49fa8fe911f878,2026-10-27T21:11:12+00:00,Update step 286 round 287,7248ee0ff6c170f06a2035a30dc8d4c0cdc7db8f,first_status_after_checkpoint
+287,9159921728,9e8f9a520f89e457f3a06de4c9dba2481f1510fd,2026-10-28T02:55:17+00:00,Update step 287 round 288,f2abb1cac71b43d06c83dbafd946f4e3b6b1dc5b,first_status_after_checkpoint
+288,9217855552,4d97f603735feb07c02f60365c59069e4e6e07d6,2026-10-28T16:11:28+00:00,Update step 288 round 289,b7c3d782a79b8f32e2ad0bd3359ff5f430e99b80,first_status_after_checkpoint
+280,9222180928,7367146a799cef5976cc1af3431ff23da9d2f211,2026-10-28T17:38:29+00:00,Update step 280 round 289,c1020804d13f7d76fac2caf9e10641156828783d,first_status_after_checkpoint
+280,9222180928,a99052bb05125b31de177d8b9287f702713051b9,2026-10-28T17:40:35+00:00,Update step 280 round 289,d1298794e8c74948be46c0c801bae56386dd42a0,first_status_after_checkpoint
+283,9233530944,00775cfabe8b1c93eb09b06c496c4b7a880806cc,2026-10-28T20:16:00+00:00,Update step 283 round 281,7ecc6b0d934e4a8ccc8861b1ae03ad9e30185fe6,first_status_after_checkpoint
+281,9233530944,7643adc93aba7e23e49fd34df033c545e06da3ac,2026-10-28T20:21:58+00:00,Update step 281 round 284,760381f70d38842a0ddd7cb6aaf20df10215bc6a,first_status_after_checkpoint
+282,9259126848,6c0959719f362366afa25f37e4afa266c81eab4f,2026-10-28T22:16:25+00:00,Update step 282 round 285,e80d1f4253fe0b45138c58965973cd85c2936fe1,first_status_after_checkpoint
+281,9259126848,c2e7c51825c15f1e12be66f6dbbcd1ac1ce07c4e,2026-10-28T22:36:41+00:00,Update step 281 round 283,f7b102a63e1256c17f9efc26fa6665ff3aec4725,first_status_after_checkpoint
+282,9325826112,700aa9e981b7bda3902ccee76529359fc92b39f9,2026-10-29T02:41:30+00:00,Update step 282 round 284,90342e92d77043badb1cca1cec0c1de92fab4670,first_status_after_checkpoint
+283,9366253632,f265d94b158aa1048048dde903299101ba2b7129,2026-10-29T06:43:37+00:00,Update step 283 round 285,65da73f57080d30b576a187c39e9b82761887898,first_status_after_checkpoint
+281,9366253632,c1f9e37b956ad30b4eb4e5d81a0d9926259df05c,2026-10-29T08:29:54+00:00,Update step 281 round 287,618fe3038f3e97b00d6eac0f632441593426a839,first_status_after_checkpoint
+282,9431158848,120bd3a8e4f768f95a11eea634316b7775654ac3,2026-10-29T17:17:38+00:00,Update step 282 round 283,349dc60a7efd57fb7658cd89a11d239c468396e6,first_status_after_checkpoint
+283,9469050944,5d1a1f7bb5179762d458c8ad8173e6ee8ea4eacb,2026-10-29T18:27:29+00:00,Update step 283 round 284,877c63a8eb8ae03fde955660314bd2512783f601,first_status_after_checkpoint
+281,9473765440,e5a14520993536c7e173bb728b759a2691b733e0,2026-10-29T18:49:57+00:00,Update step 281 round 284,a9871efcebe7c3c387d978e2910deb643e2bb92a,first_status_after_checkpoint
+282,9502466112,7792888eff51720d651410ca2de49d934426c5e2,2026-10-29T21:12:21+00:00,Update step 282 round 285,bf5938493ff74ba2356d0538cc1a74b73bdaabdf,first_status_after_checkpoint
+283,9507020864,cfd57ebdaa341b09a80cb0a8110601c71513c609,2026-10-29T21:59:06+00:00,Update step 283 round 286,47a0b00a9fc594725573491b129073a61bfc7f6b,first_status_after_checkpoint
+284,9512185920,bec15dae9f667cc8e43a615b1e89e2416ea55d1b,2026-10-29T23:22:55+00:00,Update step 284 round 285,0ae5aa1da53dccc3630bee4601dc80a818e96fdc,first_status_after_checkpoint
+285,9550585920,d3a341eee3072e168811d2c51382a67be4551636,2026-10-30T03:28:59+00:00,Update step 285 round 286,ae3499e88bddc455bb895f79d94bbce7166f464b,first_status_after_checkpoint
+286,9791135808,11818da043fe28ed500360e53056b23f3a60b68a,2026-10-30T12:24:18+00:00,Update step 286 round 287,26130068d1ff0c3eff4b69f2a9bbd6bc3a1ec7bb,first_status_after_checkpoint
+287,9982177344,6aa4ae062784ec1b67e555a2b31504cf1785ef0f,2026-10-30T16:36:50+00:00,Update step 287 round 288,4ed706568aef07983030a70d9d5d9e4a410aeb4b,first_status_after_checkpoint
+288,10065543232,e75e61fd0e3cacea1a53704de2b1a5316bcb96cd,2026-10-30T20:41:50+00:00,Update step 288 round 289,7baf9f3646ff50ad9f73a32a75cdf37a24262166,first_status_after_checkpoint
+289,10091851840,47d3208448d1e34ad12236768128f6267bb49ea3,2026-10-30T22:52:00+00:00,Update step 289 round 290,1a1cbfe27d98feaceb3e1cb64fb217cdf811c76f,first_status_after_checkpoint
+290,10099114048,5467974b3845206d506feb9548791ee5038bb244,2026-10-31T03:08:28+00:00,Update step 290 round 291,a7429037179525c7f7cf5bc0f175594f1bfdf454,first_status_after_checkpoint
+291,10207961152,f7a17e6136d942e385abe3542544e7daa8191846,2026-10-31T07:12:25+00:00,Update step 291 round 292,c4679aec841deb595274c825afac541befa919c6,first_status_after_checkpoint
+292,10363437120,c73ecd28d8fa4de0fa9ededcddda3250ab2a984c,2026-10-31T11:17:17+00:00,Update step 292 round 293,406c4c6b648d4972c24816b88726caed7b1507ac,first_status_after_checkpoint
+293,10512138304,c331fe1615a0c6b80a2ae8f911f63a7052047944,2026-10-31T15:23:06+00:00,Update step 293 round 294,89ce48597fd2e7b890aa447a3bd99ba2c60f8fb0,first_status_after_checkpoint
+294,10653646912,4db05fc48c0ae4f6143ea973f6825269bb802a01,2026-10-31T19:33:34+00:00,Update step 294 round 295,c008acbe75dd4a649df8fb04dc5eab0454ba42d1,first_status_after_checkpoint
+295,11210371136,e1e6fc322c623526a8b6f7af92a6e1b9c6a9846e,2026-11-01T12:41:13+00:00,Update step 295 round 296,6840364061173e00d641fdca6ffa9ac3438b857f,first_status_after_checkpoint
+296,11506720832,6c272a0ec8845096fb0d846de3b58b19cc0487be,2026-11-01T16:59:57+00:00,Update step 296 round 297,2f8180591531c087155600c11922ccc596175eff,first_status_after_checkpoint
+297,11922464832,6391e752ef0c95cde3ecd2f347fc8f1ec6e30414,2026-11-01T21:10:59+00:00,Update step 297 round 298,d24d04c47d15b856f7c35a26489d4df03a66923d,first_status_after_checkpoint
+298,12364828736,e0439e171f225c3849c3e74076e908aa374f56ea,2026-11-02T01:20:10+00:00,Update step 298 round 299,947e1c99ef1e3e0db43d78e26bf0fc1842f4e55a,first_status_after_checkpoint
+299,12641148992,81a55e7466e9349ce9ff3bec3b6f74a842d93293,2026-11-02T05:28:41+00:00,Update step 299 round 300,81783c5b555b0b2153cd71b40fcb64422e4e8248,first_status_after_checkpoint
+300,12839641152,cb71428be4886bc3268db6da4de1946f8bfa5e62,2026-11-02T09:34:28+00:00,Update step 300 round 301,1e7e3f26ce75f3b4f141f993cda7662dd2e3f725,first_status_after_checkpoint
+301,13030326336,5f3791aa4eb60e722b1a69490e0d2cc0013f6bce,2026-11-02T13:38:22+00:00,Update step 301 round 302,0089b4882bce43dc5542a56de43e9fe77e20e6da,first_status_after_checkpoint
+302,13258821696,d310008fbc0105ac555a2f203b308f165543819d,2026-11-02T17:43:47+00:00,Update step 302 round 303,0f4aa3c294c72e5ef6fd570aa19d41034b963f79,first_status_after_checkpoint
+303,13522559040,b0292dd543a0156af2e4e85be40407d9d87a45bb,2026-11-02T21:49:38+00:00,Update step 303 round 304,8b596e39122553b79de2edbd5ce07d3513428da8,first_status_after_checkpoint
+304,13831266368,f83e2c2b73421a48ece8f1c94d409d107d4e89d4,2026-11-03T01:59:08+00:00,Update step 304 round 305,991c4045f42fb1c9a4b33ebddf427b72cec9d42a,first_status_after_checkpoint
+305,14093803584,6b807998bd1eca5e01ccbdcf6b9e5c977e7286d6,2026-11-03T06:06:37+00:00,Update step 305 round 306,bcea5e8d448dfbe30f521644f4b0726be62f1d0a,first_status_after_checkpoint
+306,14318903360,fa4de8a72d2c02a5e35c9583de3c6092c13e9b61,2026-11-03T10:14:02+00:00,Update step 306 round 307,c07c3dca88637db959c5425c64d8582bca818373,first_status_after_checkpoint
+307,14537748544,11773a7bf8d3efcd30807e2135722c9f6152fc2f,2026-11-03T14:20:14+00:00,Update step 307 round 308,c427b3cb8aaa974d36071d9149224aeb98c76d2d,first_status_after_checkpoint
+308,14710374464,1d336c5920e76f3f30ccc62f86f7bea2163f8c28,2026-11-03T18:27:20+00:00,Update step 308 round 309,49f34026d0a77639aea7b5e81b7adee90a7ed59c,first_status_after_checkpoint
+309,14941511744,d62169d5635c9914b828a1ecaf5fd55dd3f176cd,2026-11-03T22:34:04+00:00,Update step 309 round 310,2be090797119ac7abd7a043da03ec7ab340bd79b,first_status_after_checkpoint
+310,15354552384,600596a0e77d408bb12a8c4015ffba2f525ad5e0,2026-11-04T02:40:21+00:00,Update step 310 round 311,c4063efd923dc0269c2ed41b2bcd8108f7c461ca,first_status_after_checkpoint
+311,15786143808,cfdfde99cc4cd3a06eecabc2aba7ad5eb4b45693,2026-11-04T06:47:21+00:00,Update step 311 round 312,db2b8fe8e9273b759ee51cc59f944037ca363956,first_status_after_checkpoint
+312,16177283136,cb62d126227d6c77bdcaea9369aca4dd3e34040a,2026-11-04T10:51:41+00:00,Update step 312 round 313,875b71eb1f426f8743c4ab9783c077f2a65b1138,first_status_after_checkpoint
+313,16534790208,b7b9b365857ea1857358b5a50f960d02dab83ea3,2026-11-04T14:56:24+00:00,Update step 313 round 314,b89c692e4d1b6220d1334c31c99400c4cc7a0054,first_status_after_checkpoint
+314,16879083584,06b6ccdc9a429245ec7b0c981db3090b2efb516c,2026-11-04T19:02:54+00:00,Update step 314 round 315,40ed972e63fd557b8f23e4c891ac351a69136699,first_status_after_checkpoint
+315,17255116864,6d5a82dd75516724d3589c5b6fc3041c6fcfc3d5,2026-11-04T23:08:57+00:00,Update step 315 round 316,0521af695bf4e53159ad3d5cc6e226b99a7e4c4f,first_status_after_checkpoint
+316,17622130752,328c81b123706c1672fb154d323af199a6f46c32,2026-11-05T03:16:03+00:00,Update step 316 round 317,958a656e9f914669745bf9a6dcbf10ad33b5db41,first_status_after_checkpoint
+317,17961074752,81443566d77d2c56c7a0ab8b0c98b7307f13175c,2026-11-05T07:21:15+00:00,Update step 317 round 318,21065c2d76792c7058d49dd23a07428895e343e2,first_status_after_checkpoint
+318,18302947392,8691a08a4d8c63287581ccdf654e8a8e2ddbbeba,2026-11-05T11:25:36+00:00,Update step 318 round 319,b7d0e074f6981438355440bb0eede5f3fb79154c,first_status_after_checkpoint
+319,18657910848,4f6c5fa489c4ea37fb41671d1c83ac12ac8341f7,2026-11-05T15:29:40+00:00,Update step 319 round 320,8b981a424a8e0291272229592804e8482b8af5e7,first_status_after_checkpoint
+320,19065245760,c95136ff00fbe943b8ca683db6f8ceed06ae1d35,2026-11-05T19:33:14+00:00,Update step 320 round 321,b03184792de79a17006bc2b5a9df9a85737bbd0a,first_status_after_checkpoint
+321,19489497152,4183a46da8e3609fc9fccbac686eb862eaf3d064,2026-11-05T23:37:12+00:00,Update step 321 round 322,d1033fbbbdf36de64acee800603e36b855445f19,first_status_after_checkpoint
+322,19874811968,c7abbcd814b423b667e81d8671300ccd51f21daa,2026-11-06T03:42:39+00:00,Update step 322 round 323,6f63ac6c406655f3afe5456ce50fd253bfa82e22,first_status_after_checkpoint
+323,20362752064,6adf569b5f2250006abd69b9d5020efd1dd6ab50,2026-11-06T07:47:00+00:00,Update step 323 round 324,3df893d7b05f28db6147d9a6d6bb0b41a64589bc,first_status_after_checkpoint
+324,20829913152,78cebae9b0e25673683aca0e09194e28e238c392,2026-11-06T11:51:21+00:00,Update step 324 round 325,e66131c10b342754f28bef180a4f255a0fc5d1c2,first_status_after_checkpoint
+325,21339254848,1f51e51205911ac80699a9a96bc51830e3f4008f,2026-11-06T15:55:06+00:00,Update step 325 round 326,bcf0239a6e07b38756d802ba5a78640279be7673,first_status_after_checkpoint
+326,21781352512,4add99c50c79a835ffb8a6cd8f137574cf57a54e,2026-11-06T19:58:53+00:00,Update step 326 round 327,3c7c62cc93e2d2b3c1066f9890368ae181f092f0,first_status_after_checkpoint
+327,22135099456,57ee4719a08a1176680e972c30f3111a54f7ead1,2026-11-07T00:03:07+00:00,Update step 327 round 328,6098f1507852b2561569626cf994c5bd845c8020,first_status_after_checkpoint
+328,22464716864,4e891ac7fe3f3103a37668de92d8b623e9bf5185,2026-11-07T04:05:59+00:00,Update step 328 round 329,33e9db2d2d50909b77c0561449f2c717b4fa03be,first_status_after_checkpoint
+329,22878965824,76ddc1caa0a4157dff5a1aea99fdaa5561adce8e,2026-11-07T08:09:40+00:00,Update step 329 round 330,e570af03dea8c71e59e5d1892d58b082b914f529,first_status_after_checkpoint
+330,23345950784,6bba9ab0cb48e76851566928643ca9082202b72d,2026-11-07T12:14:33+00:00,Update step 330 round 331,a4b567d83c9d1506ff74d3fabd4e95a53808415e,first_status_after_checkpoint
+331,23820488768,a025f83e7c30fa9c538107a18a95605b300e9bea,2026-11-07T16:19:41+00:00,Update step 331 round 332,e9f7a4485ace98a94db9e9052ebec3841974fa46,first_status_after_checkpoint
+332,23934615616,777a0051e4ae6c4a7d625387800b35b4fc0dd66d,2026-11-07T17:57:28+00:00,Update step 332 round 333,b00fb2a367113282b1944002a49d5204ba2b1469,first_status_after_checkpoint
+333,24581156928,1cef006a67a889f8a3051ccdf5fe75beae79d5cb,2026-11-08T00:40:11+00:00,Update step 333 round 334,092e2902a5bdf0ce88659ec6b9edf3e071e2927e,first_status_after_checkpoint
+334,24975302720,a2fa39d107f05fd1a5cd29935d8d728d5855aa95,2026-11-08T04:45:44+00:00,Update step 334 round 335,084715ddd406db97b8b13fd29cef5fe930926e2d,first_status_after_checkpoint
+335,25457352768,e309135b0e1e96702b53f4bc31a2e3f6de08c89d,2026-11-08T08:54:06+00:00,Update step 335 round 336,e7da5c33de03327a62e914ef30c5bbe4ebc5a541,first_status_after_checkpoint
+336,25890115648,7c4206c81c6f53b954d667fa3198d5d5e6e0873f,2026-11-08T13:01:26+00:00,Update step 336 round 337,03509c20b0860534475980b476126dbe6d113d62,first_status_after_checkpoint
+337,26487488576,5ac5c0c5b10a13034bf5eeae69a30f6fc91ca5c1,2026-11-08T19:44:48+00:00,Update step 337 round 338,8caff179f58e52d3e2c4e187bd1f2d83131eeb25,first_status_after_checkpoint
+338,26972528704,350524a0d214bf19063d0ae6b50bdc5aec2aaa25,2026-11-09T00:32:26+00:00,Update step 338 round 339,e4108bb011229bf7610c8b8bac38a874f16203b2,first_status_after_checkpoint
+339,27459481664,ad9b04cbc2e1e3373814a271eb1557b0d7ab031e,2026-11-09T04:39:09+00:00,Update step 339 round 340,f2d59b3086ec41c1730f377d6d6573840ae2221b,first_status_after_checkpoint
+340,27959730240,13b85f0cb02637121780ccb2ae08ba5802886b93,2026-11-09T08:45:38+00:00,Update step 340 round 341,c68e37cebd536118effb6398a708bdc6f8e681e3,first_status_after_checkpoint
+341,28420087872,83544c7a480e347557c1757c6aeddf1e5c8a5b7a,2026-11-09T12:51:05+00:00,Update step 341 round 342,14981f37fe81ad7ca37e376c20b1c075510292b0,first_status_after_checkpoint
+342,28846870592,bebdd2be7323f4ddb3be286f2aa041f3c83f5c13,2026-11-09T16:56:27+00:00,Update step 342 round 343,a7ba7c1436e50f566c0e1f045e1c9dc8a8710107,first_status_after_checkpoint
+343,29279428672,13be0571659abe0e12baccb214225537d9545f31,2026-11-09T21:01:10+00:00,Update step 343 round 344,6fd2fb823dfe86cb8d86a3bcbf02828cfb33c1d1,first_status_after_checkpoint
+344,29684850752,6cd948b3d9f5b4c84372a60759e142d80589b8c6,2026-11-10T01:19:45+00:00,Update step 344 round 345,227471e06907a5d02e2029d35064d112fe4ec5d5,first_status_after_checkpoint
+345,30130200640,3a369ea6404513056012273ae7a0bc699070386e,2026-11-10T05:22:54+00:00,Update step 345 round 346,72ff8c7093bef343266fb982c31122dc62074650,first_status_after_checkpoint
+346,30611316800,9eb50bece7f48d5f375c29208df23cee1ac7a3d3,2026-11-10T09:27:32+00:00,Update step 346 round 347,ae62792e57cc0efdff2d710a18d1c1d49e6802eb,first_status_after_checkpoint
+347,31045673024,df14acfd85d77fb925da9071217b59df762e19a2,2026-11-10T13:31:57+00:00,Update step 347 round 348,2313c8c587ab6a083aa65d98a9c47c3ff0265431,first_status_after_checkpoint
+348,31415185472,59c016e9487524c6b9972353fbfff1904532b0d9,2026-11-10T17:36:10+00:00,Update step 348 round 349,26bcde6d1d2c88f4060425c50e344684d28c7184,first_status_after_checkpoint
+349,31574310976,23ab6b5186cf7ffd8fa574bf49111d3708185531,2026-11-10T21:40:12+00:00,Update step 349 round 350,4d9eb35f2249be4f26c23404d1a7ab6ed778c9fc,first_status_after_checkpoint
+350,31887511616,94e234092def47d8c161fb0babf1ee6be646fe32,2026-11-11T01:54:40+00:00,Update step 350 round 351,062b00a2db975ac2306baee7ac103345616b2211,first_status_after_checkpoint
+351,32225030208,925825b9c320d6ad2c6cf664d406656d1d22261e,2026-11-11T05:59:20+00:00,Update step 351 round 352,ec12c2c58ffe98a5842f6ec6c5df900b91cf99fc,first_status_after_checkpoint
+352,32650616896,4d35bc320afc80097b5bed19d6f841fea9781cee,2026-11-11T10:02:58+00:00,Update step 352 round 353,f1732d498b399c083fc83406044aa3d6daf0794f,first_status_after_checkpoint
+353,33229676608,63baba53daa280b6baf58c63e9826be90f169f2f,2026-11-11T15:14:10+00:00,Update step 353 round 354,eb09fe1a918bbff019d516831d91c3fc1e61a7c2,first_status_after_checkpoint
+354,33609470016,ccdcb573d4e23f2f913105673a53e4104b4e0092,2026-11-11T19:18:29+00:00,Update step 354 round 355,f7e888d1a13eb8c5c7724c213c7deaf3abad16e7,first_status_after_checkpoint
+355,33954816064,e98812e353636d364988f7d67e0102d7080be501,2026-11-11T23:20:17+00:00,Update step 355 round 356,de24ba4ab597e02c86d1bdbaaf36505ed07ba347,first_status_after_checkpoint
+356,34297020480,a3d83ecbfa57001726c9ad5a84a05c8e559bc1bf,2026-11-12T03:22:04+00:00,Update step 356 round 357,b9cdbbc4e23cb455e4cbda447da32a485f292e0c,first_status_after_checkpoint
+357,34675040320,7f0e6ab99119df5d96015527c8ad2888b47c2eff,2026-11-12T07:25:06+00:00,Update step 357 round 358,61b1366e67c4a14f7508434968ffc1dc93ed58c3,first_status_after_checkpoint
+358,35028242496,2a01b1c500723ebf7734eef4537bb1dd327b81cd,2026-11-12T11:27:11+00:00,Update step 358 round 359,61d9af5ebbb82b3463d5fa7571e21855c85a7d51,first_status_after_checkpoint
+359,35384197184,0b5ca7bfcf2443d86db8c13ec0d4c720bd5e6c49,2026-11-12T15:29:05+00:00,Update step 359 round 360,840726905f37a2062897b3497592711472d94426,first_status_after_checkpoint
+360,35580395584,ebf5e1acff6c799079d7517272afa30ee854b80c,2026-11-12T19:31:29+00:00,Update step 360 round 361,70287454172c494657a775d1bcbf1f4f837da6b0,first_status_after_checkpoint
+361,35820974144,dd9d64500e7b4914ee013c867cd5e6186560611b,2026-11-12T23:35:12+00:00,Update step 361 round 362,fbe300ad2052241c45f46b51a4f6d69908c80f81,first_status_after_checkpoint
+362,36186513472,115bba06356803b45969f30aa8def498385eee83,2026-11-13T03:38:08+00:00,Update step 362 round 363,e95eb7adacf311b339d49fae36f02b79f81fed34,first_status_after_checkpoint
+363,36447289408,5a3016960964ad162601fd5d726ed7f6e4459b4e,2026-11-13T07:40:44+00:00,Update step 363 round 364,8ee3917485370222aec6de6792b55d95d905df00,first_status_after_checkpoint
+364,36616007744,4f1c9055652c370d723b231c76228e3a51b6f1b6,2026-11-13T11:43:49+00:00,Update step 364 round 365,b82f7bc21e891f1ffc236845872692e2a541cd63,first_status_after_checkpoint
+365,36744806464,cae3716f02f1ed284af9e5d795e7404ce2edd046,2026-11-13T15:46:45+00:00,Update step 365 round 366,3b59c51552ecf2cbdb698bc8417d71337d8933e7,first_status_after_checkpoint
+366,36901146688,1afc608ed85dd2f9d177073c668b353f3206cd36,2026-11-13T19:49:11+00:00,Update step 366 round 367,2f33f978018d640b45d910aa42775300f44df1e0,first_status_after_checkpoint
+367,37139697728,f966959e6b9383e41d7f89309f125577a5adf84a,2026-11-13T23:53:54+00:00,Update step 367 round 368,fc3cb43246a62873105dc0b80e6585b3886557a4,first_status_after_checkpoint
+368,37448319040,52298bdd98d51b31efa7e54da1fd965f8bfddfec,2026-11-14T03:58:39+00:00,Update step 368 round 369,ec6d205d2381ad55a611d08fa6841753a92ebc5b,first_status_after_checkpoint
+369,37740691520,b63212a843d662dadbec35f8544b6e0dafa6e72b,2026-11-14T08:03:09+00:00,Update step 369 round 370,6a0dee60887c805bd81e2ffdaa4d03160aa62217,first_status_after_checkpoint
+370,38013415488,1a4b4b0ed163ee971ffd7dca3900797e6859a361,2026-11-14T12:05:57+00:00,Update step 370 round 371,ac03e23543ef124b0c40a2f104a1bdaf18da7c88,first_status_after_checkpoint
