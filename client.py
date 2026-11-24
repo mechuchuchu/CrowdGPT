@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """
-CrowdGPT GUI Client v3.3
+CrowdGPT GUI Client v3.5
+v3.4 changes
+  - Auto-pause: VRAM is measured as growth since start (the CUDA context and desktop were counted as "another app"), 4 samples of debounce
+  - Stop now fully releases VRAM (the degradation ladder kept the model alive after Stop)
+  - Auto-pause: training stops when another app (game, render, …) starts using the GPU/CPU/RAM;
+    disable with CROWDGPT_ACTIVITY_PAUSE=0, tune with CROWDGPT_ACTIVITY_PAUSE_INTERVAL/CPU/RAM/VRAM
+
 v3.3 changes
   - Fixed: registration sent a corrupted e-mail field
   - Fixed: Hugging Face weight check (expected_sha) crashed after every download and forced the slow coordinator stream
@@ -79,6 +85,12 @@ try:
 except Exception:
     msvcrt = None
 
+# Linux/WebKitGTK: a white, empty window usually means the web view lost its GPU context (NVIDIA drivers, or VRAM taken
+# by training). The dashboard is simple, so render it in software and keep the GPU for training.
+# CROWDGPT_WEBKIT_GPU=1 keeps WebKit's GPU rendering.
+if sys.platform.startswith("linux") and os.environ.get("CROWDGPT_WEBKIT_GPU", "0") != "1":
+    os.environ.setdefault("WEBKIT_DISABLE_COMPOSITING_MODE", "1")
+    os.environ.setdefault("WEBKIT_DISABLE_DMABUF_RENDERER", "1")
 try:
     import webview
     _WEBVIEW_OK = True
@@ -94,6 +106,13 @@ import torch.nn as nn
 import torch.nn.functional as F
 import requests
 from torch.utils.checkpoint import checkpoint
+try:
+    # Optional helper module (ReLoRA paradigm). The auto-updater only ships client.py and
+    # client.html, so a missing crowd_relora.py must never stop the stock client from starting.
+    from crowd_relora import LoRALinear as _LoRALinear
+except Exception:
+    class _LoRALinear(nn.Module):  # never instantiated: isinstance() is simply always False
+        pass
 import http.client
 from requests.exceptions import ChunkedEncodingError
 import gzip
@@ -188,7 +207,7 @@ class TimingRecorder:
         self.phase("total", time.monotonic() - self.started, ok=ok, **fields)
 
 
-CLIENT_VERSION = "3.3"
+CLIENT_VERSION = "3.9"
 VERSION_URL = "https://raw.githubusercontent.com/Vxtzq/CrowdGPT/main/docs/version.txt"
 CLIENT_URL  = "https://raw.githubusercontent.com/Vxtzq/CrowdGPT/main/client.py"
 HTML_URL    = "https://raw.githubusercontent.com/Vxtzq/CrowdGPT/main/client.html"
@@ -588,7 +607,7 @@ except Exception: pass
 DEFAULT_SERVER = "https://server.crowdgpt.net"
 DATASET_REPO_ID = "Vxtzq/CrowdGPT"
 TOKENIZER_REPO = "Qwen/Qwen3-0.6B"
-HF_MODEL_REPO_ID = "Vxtzq/Crowd-v1"
+HF_MODEL_REPO_ID = "Vxtzq/Crowd-v1.5"
 USE_HF_WEIGHTS = True
 UPLOAD_CHUNK_BYTES = 64 * 1024 * 1024
 MAX_DIRECT_UPLOAD_BYTES = 80 * 1024 * 1024
@@ -664,7 +683,7 @@ def _load_tokenizer_worker():
     global TOKENIZER
     try:
         from transformers import AutoTokenizer
-        candidates = [TOKENIZER_REPO, "Qwen/Qwen2.5-1.5B", "Qwen/Qwen2.5-0.5B", "Vxtzq/Crowd-v1"]
+        candidates = [TOKENIZER_REPO, "Qwen/Qwen2.5-1.5B", "Qwen/Qwen2.5-0.5B", "Vxtzq/Crowd-v1.5"]
         for repo in candidates:
             try:
                 tok = AutoTokenizer.from_pretrained(repo, trust_remote_code=True)
@@ -1114,6 +1133,35 @@ def install_hard_vram_cap(device, safety_gb=SAFETY_MARGIN_GB):
         return cap_bytes / 1024**3
     except Exception: return None
 
+UMA_VRAM_SHARE_DEFAULT = 0.75
+
+def _uma_ram_ceiling_gb(idx, total_bytes):
+    """System-RAM ceiling for a unified-memory GPU, or None for discrete cards.
+
+    On an APU the VRAM pool *is* system RAM, so `mem_get_info` reports the whole
+    machine as free VRAM. Measured on a 30.5 GB Strix Halo (gfx1150): the naive
+    budget was 30.34 GB of 32 GB and `recommend_batch_size` picked 16, leaving
+    nothing for the compositor. Cap the budget by a share of physical RAM.
+    """
+    integrated = False
+    try: integrated = bool(getattr(torch.cuda.get_device_properties(idx), "is_integrated", False))
+    except Exception: pass
+    try:
+        import psutil
+        total_ram = float(psutil.virtual_memory().total)
+    except Exception: return None
+    if not integrated:
+        # Only treat a card as unified-memory when torch says so, or it is a known gfx115x APU.
+        # A size heuristic (VRAM >= 0.9 x RAM) wrongly capped discrete cards on low-RAM PCs.
+        try: integrated = str(torch.cuda.get_device_properties(idx).gcnArchName or "").startswith("gfx115")
+        except Exception: pass
+    if not integrated: return None
+    share = UMA_VRAM_SHARE_DEFAULT
+    try: share = float(os.environ.get("CROWDGPT_UMA_VRAM_SHARE", share) or share)
+    except Exception: pass
+    share = max(0.4, min(1.0, share))
+    return total_ram * share / 1024**3
+
 def auto_detect_vram_budget():
     global train_backend
     if train_backend in ("CUDA", "ROCM") and torch.cuda.is_available():
@@ -1122,7 +1170,10 @@ def auto_detect_vram_budget():
             fb, tb = torch.cuda.mem_get_info(idx)
             total_gb = tb / 1024**3; free_gb = fb / 1024**3
             usable = max(0.25, min(total_gb, free_gb) - SAFETY_MARGIN_GB - ALLOCATOR_RESERVE_GB)
-            memory_config.update({"ram_gb": round(usable, 2), "is_auto_detected": True}); return
+            ceiling = _uma_ram_ceiling_gb(idx, tb)
+            if ceiling is not None: usable = max(0.25, min(usable, ceiling - SAFETY_MARGIN_GB))
+            memory_config.update({"ram_gb": round(usable, 2), "is_auto_detected": True,
+                                  "unified": ceiling is not None}); return
         except Exception: pass
     if train_backend == "MPS":
         try:
@@ -1276,7 +1327,13 @@ def recommend_batch_size(sl=MAX_SEQ_LEN, force_mode=None):
     if train_backend == "ROCM":
         try:
             frac = float(os.environ.get("CROWDGPT_ROCM_VRAM_FRACTION", "0.85"))
-            if 0.5 <= frac <= 1.0: budget_gb *= frac
+            # On unified memory the budget already came from the UMA ceiling
+            # (total RAM x CROWDGPT_UMA_VRAM_SHARE, 0.75 by default), so applying the
+            # ROCm fraction on top charges the share twice: 0.75 x 0.85 = 0.64 of RAM.
+            # Measured on a 30.5 GB Strix Halo: 21.9 GB budget became 18.6 GB, which
+            # rejected batch 32 by 0.19 GB while the run peaked at 13.2 GB.
+            if 0.5 <= frac <= 1.0 and not memory_config.get("unified"):
+                budget_gb *= frac
         except (TypeError, ValueError): pass
         raw_cap = os.environ.get("CROWDGPT_ROCM_BATCH", "").strip()
         if raw_cap:
@@ -1813,7 +1870,7 @@ class GroupedQueryAttention(nn.Module):
         gk = {"enable_gqa": True} if gqa else {}
         if _is_directml(q): o = F.scaled_dot_product_attention(q.contiguous().cpu(), k.contiguous().cpu(), v.contiguous().cpu(), is_causal=True, **gk).to(q.device)
         elif q.device.type == 'cuda' and getattr(torch.version, 'hip', None):
-            if os.environ.get('CROWDGPT_ROCM_SDPA', '1') != '0':
+            if os.environ.get('CROWDGPT_ROCM_SDPA', _rocm_sdpa_default()) != '0':
                 try: o = F.scaled_dot_product_attention(q, k, v, dropout_p=0.0, is_causal=True, **gk)
                 except RuntimeError as exc:
                     if _is_oom(exc): raise
@@ -1835,6 +1892,27 @@ class GroupedQueryAttention(nn.Module):
             aw = aw.masked_fill(~(ci <= ri).unsqueeze(0).unsqueeze(0), float('-inf'))
             chunks.append(F.softmax(aw, dim=-1, dtype=torch.float32).to(q.dtype) @ v[:, :, :e, :])
         return torch.cat(chunks, dim=2)
+
+_ROCM_SDPA_DEFAULT = None
+
+def _rocm_sdpa_default():
+    """Whether to try SDPA before the manual chunked attention on ROCm.
+
+    gfx115x (Strix Halo / RDNA3.5 APUs) has no enabled AOTriton flash or
+    memory-efficient backend, so SDPA falls back to the math kernel. Measured on
+    a Radeon 890M (gfx1150), bs4 sl512: 4.79 s/step with SDPA vs 4.09 s/step with
+    the chunked kernel, and 16.8 ms vs 6.3 ms for the attention op alone. Other
+    ROCm parts keep SDPA. `CROWDGPT_ROCM_SDPA` overrides either way.
+    """
+    global _ROCM_SDPA_DEFAULT
+    if _ROCM_SDPA_DEFAULT is not None: return _ROCM_SDPA_DEFAULT
+    val = "1"
+    try:
+        gfx = str(torch.cuda.get_device_properties(0).gcnArchName or "")
+        if gfx.startswith("gfx115"): val = "0"
+    except Exception: pass
+    _ROCM_SDPA_DEFAULT = val
+    return val
 
 class SwiGLU(nn.Module):
     def __init__(self):
@@ -1958,7 +2036,8 @@ class SotaGPT(nn.Module):
         if dtype is not None and w.dtype != dtype: return w.to(dtype)
         return w
 
-    def forward_features(self, idx, use_chunked=True, use_ckpt=True, stream_dtype=None, head_w=None):
+    def embed(self, idx, head_w=None):
+        """Token (+ engram) embedding. Split out so a paradigm can run the trunk in pieces."""
         dev = self.main_device; wdev = self.wte.weight.device
         if head_w is not None and not self.head_on_gpu and head_w.device == dev:
             x = F.embedding(idx.to(dev), head_w)
@@ -1970,9 +2049,16 @@ class SotaGPT(nn.Module):
             eng = self.engram(idx)
             if eng.dtype != x.dtype: eng = eng.to(x.dtype)
             x = x + eng
+        return x
+
+    def run_blocks(self, x, start=0, stop=None, use_chunked=True, use_ckpt=True, stream_dtype=None):
+        """Blocks ``[start, stop)``. The SOLO/MOSAIC paradigms train a slice at a time."""
+        dev = self.main_device
+        stop = len(self.blocks) if stop is None else min(int(stop), len(self.blocks))
         if dev.type == 'cpu': cos, sin = self.freqs_cos_cpu, self.freqs_sin_cpu
         else: cos, sin = self.freqs_cos_main, self.freqs_sin_main
-        for i, block in enumerate(self.blocks):
+        for i in range(max(0, int(start)), stop):
+            block = self.blocks[i]
             if dev.type == 'cpu' or i in self.gpu_layer_set:
                 if use_ckpt: x = checkpoint(block, x, cos, sin, use_chunked, use_reentrant=False, preserve_rng_state=False)
                 else: x = block(x, cos, sin, use_chunked)
@@ -1982,14 +2068,19 @@ class SotaGPT(nn.Module):
                     x = checkpoint(_streamed_block_cached, block, params, dev, stream_dtype, x, cos, sin, use_chunked, use_reentrant=False, preserve_rng_state=False)
                 else:
                     x = checkpoint(_streamed_block, block, dev, stream_dtype, x, cos, sin, use_chunked, use_reentrant=False, preserve_rng_state=False)
-        return self.ln_f(x)
+        return x
+
+    def forward_features(self, idx, use_chunked=True, use_ckpt=True, stream_dtype=None, head_w=None):
+        x = self.embed(idx, head_w=head_w)
+        return self.ln_f(self.run_blocks(x, use_chunked=use_chunked, use_ckpt=use_ckpt, stream_dtype=stream_dtype))
 
     def forward(self, idx, use_chunked=True, use_ckpt=True): return F.linear(self.forward_features(idx, use_chunked, use_ckpt), self.head_weight())
 
     def load_base_weights(self, fw):
         ft = torch.from_numpy(fw) if not isinstance(fw, torch.Tensor) else fw; o = 0
+        lora = _lora_layers(self)
         for n, p in self.named_parameters():
-            if not n.startswith('engram.'):
+            if _is_server_param(n, lora):
                 s = 1
                 for d in p.shape: s *= int(d)
                 src = ft[o:o + s].view(p.shape)
@@ -2625,9 +2716,16 @@ def _fwl(m, x, y, sl, ua, ad, ls=1.0, preview=False, loss_chunk=LOSS_CHUNK):
         except Exception: cards = []
     return lo * ls, cards
 
+_OOM_MARKERS = ("out of memory", "cublas_status_alloc_failed", "cudnn_status_alloc_failed",
+                "cublas_status_not_initialized", "cusolver_status_alloc_failed")
+
 def _is_oom(e):
+    """Allocation failures count as OOM, including cuBLAS/cuDNN handle creation: when the GPU is full they fail
+    with CUBLAS_STATUS_ALLOC_FAILED instead of 'out of memory' and used to skip the VRAM ladder entirely."""
     if isinstance(e, torch.cuda.OutOfMemoryError): return True
-    if isinstance(e, RuntimeError): return "out of memory" in str(e).lower()
+    if isinstance(e, RuntimeError):
+        m = str(e).lower()
+        return any(k in m for k in _OOM_MARKERS)
     return False
 
 def _clear_accel_cache(device):
@@ -2684,6 +2782,7 @@ def _train_step_safe(model, x, y, sl, ua, ad, ls, preview, ladder, emit):
     while True:
         try:
             lo, cards = _fwl(model, x, y, sl, ua, ad, ls, preview=preview, loss_chunk=ladder.loss_chunk)
+            lo = _add_mtp(model, lo, x, y)
             lo.backward(); return lo, cards
         except RuntimeError as e:
             if not _is_oom(e): raise
@@ -2826,6 +2925,51 @@ def chunked_submit_delta(srv, h, delta_path, meta, emit, se):
                 emit("log", f"Chunk too large. Reducing to {chunk_size / (1024 * 1024):.0f} MB and retrying."); continue
             raise
 
+_MTP = {"loaded": False, "cfg": None}
+
+
+def _mtp_config():
+    """``CROWDGPT_MTP_TOKENS`` resolved once. None keeps the stock path untouched."""
+    if not _MTP["loaded"]:
+        try:
+            import crowd_mtp
+            _MTP["cfg"] = crowd_mtp.config_from_env()
+        except Exception as exc:
+            # A broken import must not stop a volunteer training next-token only.
+            print(f"⚠️ MTP disabled ({exc})", flush=True)
+            _MTP["cfg"] = None
+        _MTP["loaded"] = True
+    return _MTP["cfg"]
+
+
+def _attach_mtp(model, emit=None):
+    """Give the trunk extra prediction depths when the run asked for them."""
+    cfg = _mtp_config()
+    if cfg is None: return None
+    try:
+        import crowd_mtp
+        info = crowd_mtp.attach(model, cfg)
+    except Exception as exc:
+        if emit: emit('log', f"⚠️ MTP could not attach ({exc}); training next-token only")
+        return None
+    if emit: emit('log', f"🔮 MTP active: {info['depths']} extra depth(s), weight {info['weight']}")
+    return cfg
+
+
+def _add_mtp(model, loss, x, y):
+    """Fold the multi-token term into the step's loss (no-op when unattached).
+
+    Only the whole-trunk path can use it: a MOSAIC/SOLO slice has no readout of
+    its own, which is the same reason its local objective is auxiliary-head
+    based. Deliberately not wrapped in a bare except — a broken auxiliary loss
+    should fail the step loudly rather than silently train something else.
+    """
+    cfg = _mtp_config()
+    if cfg is None: return loss
+    import crowd_mtp
+    return loss + crowd_mtp.mtp_loss(model, x, y, cfg)
+
+
 def _build_model(bn, device, iw, ie, emit, bs=1, sl=MAX_SEQ_LEN,
                  u8_override=None, act_bytes_override=None, force_head_cpu=False):
     model = SotaGPT(bn, device, gpu_layers=None, bs=bs, sl=sl,
@@ -2833,7 +2977,85 @@ def _build_model(bn, device, iw, ie, emit, bs=1, sl=MAX_SEQ_LEN,
                     force_head_cpu=force_head_cpu)
     model.engram.table.to(model.engram_device); model.load_base_weights(iw)
     if ENGRAM_ACTIVE and ie is not None: model.engram.table.weight.data.copy_(ie.view(model.engram.table.weight.shape))
-    model.engram.table.to(model.engram_device); model.train(); return model
+    model.engram.table.to(model.engram_device)
+    _attach_paradigm(model, emit)
+    _attach_mtp(model, emit)
+    model.train(); return model
+
+def _paradigm_name():
+    """The v2 paradigm this run selected, or "" for the stock backprop path."""
+    return (os.environ.get("CROWDGPT_PARADIGM", "") or "").strip().lower()
+
+
+def _attach_paradigm(model, emit=None):
+    """Prepare ``model`` for the selected paradigm. Returns the object, or None.
+
+    Selection is by env/CLI only, so an unset ``CROWDGPT_PARADIGM`` leaves the
+    stock backprop round completely unchanged — that is the default path and it
+    must stay bit-identical for the existing fleet.
+    """
+    name = _paradigm_name()
+    if not name or name == "backprop":
+        return None
+    try:
+        import crowd_paradigm as cp
+        par = cp.select(
+            name,
+            solo_modules=int(os.environ.get("CROWDGPT_SOLO_MODULES", "2") or 2),
+            relora_rank=int(os.environ.get("CROWDGPT_RELORA_RANK", "8") or 8),
+            mosaic_slices=int(os.environ.get("CROWDGPT_MOSAIC_SLICES", "2") or 2),
+            mosaic_local_steps=int(os.environ.get("CROWDGPT_MOSAIC_LOCAL_STEPS", "30") or 30),
+            dust_population=int(os.environ.get("CROWDGPT_DUST_POPULATION", "16") or 16),
+            dust_sigma=float(os.environ.get("CROWDGPT_DUST_SIGMA", "0.01") or 0.01),
+        )
+        info = par.attach(model)
+    except Exception as exc:
+        if emit: emit('log', f"⚠️ paradigm {name!r} could not attach ({exc}); staying on backprop")
+        return None
+    model.paradigm_obj = par
+    if emit: emit('log', f"🧠 paradigm {name} active: {info}")
+    return par
+
+
+def _paradigm_step_safe(model, x, y, sl, ua, ad, ls, ladder, emit):
+    """One step through the attached paradigm, with the same OOM ladder as backprop.
+
+    The paradigm owns credit assignment, so this is the seam where a foreign
+    method plugs into the round loop: ``_fwl``'s single whole-trunk backward is
+    only the backprop case.
+    """
+    par = getattr(model, "paradigm_obj", None)
+    if par is None: return _train_step_safe(model, x, y, sl, ua, ad, ls, False, ladder, emit)
+    chunk = getattr(ladder, "loss_chunk", LOSS_CHUNK)
+    while True:
+        try:
+            if ua:
+                with torch.autocast(device_type=model.main_device.type, dtype=ad):
+                    loss = par.step(model, x, y, loss_scale=ls, loss_chunk=chunk)
+            else:
+                loss = par.step(model, x, y, loss_scale=ls, loss_chunk=chunk)
+            # DUST/MOSAIC ignore loss_scale because they build grads themselves, so
+            # gradient accumulation has to be applied here or `ls` is silently lost.
+            if par.name in ("dust", "mosaic") and ls != 1.0:
+                for prm in model.parameters():
+                    if prm.grad is not None: prm.grad.mul_(ls)
+            return torch.tensor(float(loss)), []
+        except RuntimeError as e:
+            if not _is_oom(e): raise
+            if emit: emit('log', f"💥 OOM in paradigm {par.name}; walking the degrade ladder")
+            _clear_accel_cache(model.accel_device)
+            for prm in model.parameters(): prm.grad = None
+            if not getattr(model, 'use_ckpt', True):
+                model.use_ckpt = True; continue
+            if not ladder.step_down(emit): raise
+
+
+def _train_step(model, x, y, sl, ua, ad, ls, preview, ladder, emit):
+    """Dispatch one step: paradigm-driven when one is attached, else backprop."""
+    if getattr(model, "paradigm_obj", None) is not None:
+        return _paradigm_step_safe(model, x, y, sl, ua, ad, ls, ladder, emit)
+    return _train_step_safe(model, x, y, sl, ua, ad, ls, preview, ladder, emit)
+
 
 class _MultiOpt:
     def __init__(self, opts): self.opts = [o for o in opts if o is not None]
@@ -2881,24 +3103,178 @@ def _bf16_from_bytes(buf, offset, nbytes):
     a = np.frombuffer(buf, dtype=np.int16, count=nbytes // 2, offset=offset).copy()
     return torch.from_numpy(a).view(torch.bfloat16)
 
+# ---------------------------------------------------------------------------
+# Upload layout
+#
+# The server merges one flat vector of exactly ``model_size`` values in
+# base-model order, and it sends the same vector back for the next round. Two
+# paradigms add client-side tensors -- ReLoRA's rank-r factors and the
+# SOLO/MOSAIC local heads -- so walking ``named_parameters()`` blindly both
+# shifts every offset after them and, for ReLoRA, renames the base weight to
+# ``<module>.base.weight``. A real round under those paradigms therefore died in
+# the writer with "The size of tensor a (256) must match the size of tensor b
+# (192)" (relora) or "a (32) must match b (0)" (solo/mosaic): the tensors ran
+# past the reference vector. The helpers below keep the wire format
+# byte-identical to the stock model: local tensors are skipped, and a ReLoRA
+# adapter is folded into the weight position it actually updates, so the server
+# needs no new layout to merge another round.
+_LOCAL_ONLY_PREFIXES = ('engram.', 'solo_heads.', 'mtp_projs.')
+
+def _lora_layers(model):
+    """Map dotted module path -> LoRALinear wrapper (empty when ReLoRA is off)."""
+    out = {}
+    for name, mod in model.named_modules():
+        if isinstance(mod, _LoRALinear):
+            out[name] = mod
+    return out
+
+def _is_server_param(name, lora_paths):
+    """True when ``name`` occupies a slot in the server's flat vector."""
+    if name.startswith(_LOCAL_ONLY_PREFIXES):
+        return False
+    parent, _, leaf = name.rpartition('.')
+    return not (parent in lora_paths and leaf in ('A', 'B'))
+
+# Sparse-delta state, kept for the life of the process: the error-feedback
+# residual is only correct if it survives between rounds (that is the whole point).
+_SPARSE = {"feedback": None, "cfg": None}
+
+
+def _sparse_config():
+    """Resolve the sparse codec once; ``None`` means "do not use it"."""
+    if _SPARSE["cfg"] is not None: return _SPARSE["cfg"]
+    import crowd_sparse
+    cfg = crowd_sparse.config_from_env()
+    if cfg is not None:
+        _SPARSE["feedback"] = crowd_sparse.ErrorFeedback()
+        print(f"🔻 Sparse deltas: top {cfg.frac:.2%} of coordinates, "
+              f"error feedback {'on' if cfg.error_feedback else 'off'}")
+    _SPARSE["cfg"] = cfg
+    return cfg
+
+
+def _sparse_base_block(model, iw_bf16, cfg, feedback):
+    """Encode the server-visible delta as top-|value| entries (see `crowd_sparse`).
+
+    Returns ``(block_bytes, stats)``. Every entry carries a **global** index into
+    the flat server vector so the server can `index_add_` straight into the weights
+    it already holds: it never builds a dense 1.3 GB delta on the receive side.
+    The dropped mass goes back into ``feedback`` and is added to this tensor's next
+    delta, which is what keeps the codec unbiased instead of merely small.
+    """
+    import crowd_sparse
+    lora = _lora_layers(model)
+    o = 0; pairs = []
+    total_abs = sent_abs = 0.0; coords = 0; emitted = 0
+    for n, p in model.named_parameters():
+        if not _is_server_param(n, lora): continue
+        s = p.numel(); flat = p.detach().reshape(-1)
+        cur = flat.to('cpu', torch.float32)
+        if n.endswith('.base.weight'):
+            mod = lora.get(n[:-len('.base.weight')])
+            if mod is not None:
+                cur = cur + mod.delta_weight().detach().reshape(-1).to('cpu', torch.float32)
+        d = cur - iw_bf16[o:o + s].float()
+        d = feedback.correct(n, d)
+        idx, val = crowd_sparse.select(d, cfg)
+        kept = torch.zeros(s, dtype=torch.float32); kept[idx] = val
+        feedback.keep(n, d - kept)
+        total_abs += float(d.abs().sum()); sent_abs += float(val.abs().sum())
+        coords += s; emitted += int(idx.numel())
+        pairs.append((idx + o, val))
+        o += s
+    if o != iw_bf16.numel():
+        raise RuntimeError(f"delta size mismatch: {o} vs {iw_bf16.numel()}")
+    stats = {"emitted": emitted, "coords": coords,
+             "mass": total_abs, "massSent": sent_abs,
+             "feedbackBytes": feedback.bytes()}
+    return crowd_sparse.encode_block(pairs, o), stats
+
+
+def _write_delta_file_sparse(path, header_bytes, block, engram_arrays, level=6, piece=64 * 1024 * 1024):
+    """Same container as the dense path (gzip of header + base + engram tail), but the
+    base block is a sparse entry list. The header declares `baseBytes`, so the server
+    finds the engram tail after the entries instead of after `model_size * 2` bytes."""
+    with open(path, 'wb') as f, gzip.GzipFile(fileobj=f, mode='wb', compresslevel=level) as gz:
+        gz.write(header_bytes); gz.write(block)
+        for a in engram_arrays:
+            mv = memoryview(np.ascontiguousarray(a)).cast('B')
+            for i in range(0, len(mv), piece): gz.write(mv[i:i + piece])
+    return os.path.getsize(path)
+
 def _write_base_delta_bf16(gz, model, iw_bf16, piece=16 * 1024 * 1024):
     o = 0
+    lora = _lora_layers(model)
     for n, p in model.named_parameters():
-        if n.startswith('engram.'): continue
+        if not _is_server_param(n, lora): continue
         s = p.numel(); flat = p.detach().reshape(-1)
+        extra = None
+        if n.endswith('.base.weight'):
+            mod = lora.get(n[:-len('.base.weight')])
+            if mod is not None: extra = mod.delta_weight().detach().reshape(-1).float()
         for i in range(0, s, piece):
             cur = flat[i:i + piece].to('cpu', torch.float32)
+            if extra is not None: cur = cur + extra[i:i + cur.numel()]
             d = (cur - iw_bf16[o + i:o + i + cur.numel()].float()).to(torch.bfloat16)
             gz.write(memoryview(d.view(torch.int16).numpy()).cast('B'))
         flat = cur = d = None; p.data = torch.empty(0, dtype=p.dtype, device=p.device); o += s
     if o != iw_bf16.numel(): raise RuntimeError(f"delta size mismatch: {o} vs {iw_bf16.numel()}")
 
-def _engram_sparse_delta(table, iew_bf16, frac=0.10, chunk=32768):
+def _select_rows_by_mass(masses, max_frac=0.10, mass_frac=0.995):
+    """Tensor-free core of the engram row selection.
+
+    Chooses the smallest prefix of rows sorted by update mass that covers
+    ``mass_frac`` of the total, capped at ``max_frac`` of the table. Returns
+    ``(indices, covered, omitted)``; the omitted fraction bounds the per-lookup
+    L1 error when a token hits a dropped row, because each row's update norm is
+    at most the omitted mass.
+    """
+    n = len(masses)
+    if n == 0: return [], 0.0, 0.0
+    total = float(sum(masses))
+    if not math.isfinite(total) or total <= 0.0: return [], 0.0, 0.0
+    max_frac = min(1.0, max(0.0, float(max_frac)))
+    mass_frac = min(1.0, max(0.0, float(mass_frac)))
+    budget = max(1, int(math.floor(n * max_frac)))
+    order = sorted(range(n), key=lambda i: -masses[i])  # stable: equal masses keep row order
+    target = total * mass_frac
+    need = budget; running = 0.0
+    for k, i in enumerate(order[:budget], 1):
+        running += masses[i]
+        if running >= target: need = k; break
+    keep = min(n, budget, max(1, need))
+    selected = [i for i in order[:keep] if masses[i] > 1e-8]
+    if not selected: return [], 0.0, 0.0
+    covered = float(sum(masses[i] for i in selected)) / total
+    return selected, covered, max(0.0, 1.0 - covered)
+
+def _engram_select_rows(row_mass, max_frac=0.10, mass_frac=0.995):
+    n = int(row_mass.numel())
+    if n == 0: return torch.empty(0, dtype=torch.long), 0.0, 0.0
+    idx, covered, omitted = _select_rows_by_mass(row_mass.tolist(), max_frac=max_frac, mass_frac=mass_frac)
+    if not idx: return torch.empty(0, dtype=torch.long), 0.0, 0.0
+    return torch.tensor(idx, dtype=torch.long, device=row_mass.device), covered, omitted
+
+def _engram_sparse_delta(table, iew_bf16, frac=None, chunk=32768):
+    """Upload the rows that actually moved, not a fixed 10% of the table.
+
+    The row count follows the update mass (`CROWDGPT_ENGRAM_DELTA_MASS`, default
+    0.995) with the old 10% ceiling kept as the default cap, so the upload can
+    shrink but never grows without an explicit `CROWDGPT_ENGRAM_DELTA_MAX_FRAC`.
+    """
     n = table.shape[0]; rn = torch.empty(n, device=table.device)
     ref = iew_bf16.to(table.device) if iew_bf16.device != table.device else iew_bf16
     for i in range(0, n, chunk): rn[i:i + chunk] = (table[i:i + chunk] - ref[i:i + chunk].float()).abs().sum(dim=1)
-    k = max(1, int(n * frac)); tv, ti = torch.topk(rn, k); ai = ti[tv > 1e-8]
+    max_frac = frac
+    if max_frac is None:
+        try: max_frac = float(os.environ.get("CROWDGPT_ENGRAM_DELTA_MAX_FRAC", "0.10"))
+        except (TypeError, ValueError): max_frac = 0.10
+    try: mass_frac = float(os.environ.get("CROWDGPT_ENGRAM_DELTA_MASS", "0.995"))
+    except (TypeError, ValueError): mass_frac = 0.995
+    ai, covered, omitted = _engram_select_rows(rn, max_frac=max_frac, mass_frac=mass_frac)
     if len(ai) == 0: return np.array([], dtype=np.uint32), np.array([], dtype=np.uint16)
+    if omitted > 1e-4:
+        log.info(f"[ENGRAM] sparse delta covers {covered:.4%} of update mass; omitted {omitted:.4%} (cap {max_frac:.0%} rows)")
     sv = (table[ai] - ref[ai].float()).to(torch.bfloat16).view(torch.int16).detach().cpu().numpy().view(np.uint16)
     return ai.detach().cpu().numpy().astype(np.uint32), sv
 
@@ -2931,11 +3307,17 @@ def _write_delta_file_ngd1(path, header_bytes, model, iw_bf16, piece=4_000_000):
     """Framed 1-bit container (NGD2). Only used when no engram tail is present."""
     frames = []
     total = 0
+    lora = _lora_layers(model)
     for name, p in model.named_parameters():
-        if name.startswith('engram.'): continue
+        if not _is_server_param(name, lora): continue
         flat = p.detach().reshape(-1); size = flat.numel()
+        extra = None
+        if name.endswith('.base.weight'):
+            mod = lora.get(name[:-len('.base.weight')])
+            if mod is not None: extra = mod.delta_weight().detach().reshape(-1).float()
         for i in range(0, size, piece):
             cur = flat[i:i + piece].to('cpu', torch.float32)
+            if extra is not None: cur = cur + extra[i:i + cur.numel()]
             delta = (cur - iw_bf16[total:total + cur.numel()].float()).numpy()
             frames.append(_ngd1_compress(delta))
             total += int(cur.numel())
@@ -3137,6 +3519,123 @@ def _upload_delta_file(srv, h, delta_path, delta_size, meta, emit, se):
             )
     return accepted
 
+def _activity_pause_enabled():
+    return os.environ.get("CROWDGPT_ACTIVITY_PAUSE", "1").strip().lower() not in ("0", "false", "no", "off")
+
+def _activity_env_float(name, default, minv):
+    try:
+        v = float((os.environ.get(name, "") or "").strip() or default)
+    except (TypeError, ValueError):
+        v = float(default)
+    return max(v, minv)
+
+def _current_accel_index():
+    try:
+        td = globals().get("train_device")
+        if td is not None and getattr(td, "index", None) is not None:
+            return int(td.index)
+    except Exception:
+        pass
+    try:
+        return int(torch.cuda.current_device())
+    except Exception:
+        return 0
+
+class UserActivityMonitor:
+    """Best-effort watchdog: pauses training when the user starts another heavy task (a game,
+    a render, …) so the client stops competing for GPU / CPU / RAM.
+
+    Any one of these, after a short debounce, sets the training stop event — the same path as the
+    red Stop button — so the current round stops and the user can press Start to resume.
+      - VRAM: another process holds accelerator memory beyond this client's own reservation
+      - CPU : total CPU is busy while this client is not the main consumer
+      - RAM : free system RAM drops below a floor
+
+    Disable with CROWDGPT_ACTIVITY_PAUSE=0. Tunables: CROWDGPT_ACTIVITY_PAUSE_INTERVAL (seconds),
+    CROWDGPT_ACTIVITY_PAUSE_CPU (%), CROWDGPT_ACTIVITY_PAUSE_RAM (GB), CROWDGPT_ACTIVITY_PAUSE_VRAM (GB).
+    """
+    def __init__(self, stop_event, emit):
+        self.stop_event = stop_event
+        self.emit = emit
+        self.interval_s = _activity_env_float("CROWDGPT_ACTIVITY_PAUSE_INTERVAL", 6.0, 2.0)
+        self.cpu_busy_pct = _activity_env_float("CROWDGPT_ACTIVITY_PAUSE_CPU", 98.0, 50.0)
+        self.ram_floor_gb = _activity_env_float("CROWDGPT_ACTIVITY_PAUSE_RAM", 0.5, 0.25)
+        self.vram_other_gb = _activity_env_float("CROWDGPT_ACTIVITY_PAUSE_VRAM", 8.0, 0.25)
+        # consecutive busy samples before pausing (default 20 x 6 s = ~2 min), so a short CPU spike does not stop training
+        self.samples_needed = int(_activity_env_float("CROWDGPT_ACTIVITY_PAUSE_SAMPLES", 20, 1))
+        self._vram_base = None
+        self._stop = threading.Event()
+        self._proc = None
+        self._busy_streak = 0
+        self._fired = False
+        self._t = threading.Thread(target=self._run, daemon=True, name="activity-monitor")
+        try:
+            import psutil
+            self._proc = psutil.Process()
+        except Exception:
+            self._proc = None
+
+    def start(self):
+        if not self._t.is_alive():
+            self._t.start()
+
+    def stop(self):
+        self._stop.set()
+
+    def _run(self):
+        while not self._stop.wait(self.interval_s):
+            if self.stop_event.is_set():
+                self._busy_streak = 0
+                continue
+            reasons = self._detect()
+            if reasons:
+                self._busy_streak += 1
+                if self._busy_streak >= self.samples_needed and not self._fired:
+                    self._fired = True
+                    self.stop_event.set()
+                    try:
+                        self.emit('log', "🛑 Paused: another app is using the system (" + "; ".join(reasons) + "). Press Start to resume when you're done.")
+                    except Exception: pass
+                    try:
+                        self.emit('stopped', {})
+                    except Exception: pass
+            else:
+                self._busy_streak = 0
+
+    def _detect(self):
+        reasons = []
+        try:
+            import psutil
+            avail = psutil.virtual_memory().available / 1024**3
+            if avail < self.ram_floor_gb:
+                reasons.append(f"RAM low: {avail:.1f} GB free")
+        except Exception:
+            pass
+        try:
+            import psutil
+            total = psutil.cpu_percent(interval=None) or 0.0
+            if total > self.cpu_busy_pct:
+                own = self._proc.cpu_percent(interval=None) if self._proc is not None else 0.0
+                own = (own or 0.0) / max(1, psutil.cpu_count()) * 100.0
+                if own < total * 0.5:
+                    reasons.append(f"CPU busy: {total:.0f}% total vs {own:.0f}% ours")
+        except Exception:
+            pass
+        try:
+            if torch.cuda.is_available():
+                idx = _current_accel_index()
+                free, total = torch.cuda.mem_get_info(idx)
+                other = (total - free) - int(torch.cuda.memory_reserved(idx))
+                # "other" always contains the CUDA context and the desktop (browser, compositor), which are there before
+                # any game starts. Only growth since this monitor started counts as another app taking the GPU.
+                if self._vram_base is None or other < self._vram_base: self._vram_base = other
+                grown = other - self._vram_base
+                if grown > self.vram_other_gb * 1024**3:
+                    reasons.append(f"VRAM taken by another app: +{grown / 1024**3:.1f} GB")
+        except Exception:
+            pass
+        return reasons
+
 def run_single_round_wrapper(srv, at, se, emit):
     global train_device, train_backend
     timing = TimingRecorder.from_env()
@@ -3151,7 +3650,7 @@ def run_single_round_wrapper(srv, at, se, emit):
     cr = rs["current_round"]; timing.set_round(cr)
     timing.phase("queue", time.monotonic() - round_started)
     hb = HeartbeatManager(srv, h, cr, se, emit); hb.start()
-    model = ob = oe = x = y = lo = iw = ie = iew = ds = None
+    model = ob = oe = x = y = lo = iw = ie = iew = ds = ladder = None
     micro_step = 0; lval = 10.0; tt = 0; tid = ""; tried_cpu_fallback = False
     cohort_mode = False; cc_seed = cc_steps = cc_bs = cc_accum = cc_autocast = None; cc_optim = "any"
     optim_mode = None
@@ -3310,7 +3809,7 @@ def run_single_round_wrapper(srv, at, se, emit):
                 x, y = ds.get_batch(bs, seed=(abs(hash("cal")) % 10000) + micro_step)
                 step_x, step_y, step_sl = _cpu_calibration_batch(x, y, sl) if model.main_device.type == 'cpu' else (x, y, sl)
                 want_preview = ((micro_step + 1) % PREVIEW_EVERY == 0) if train_backend == 'ROCM' else ((micro_step == 0) or ((micro_step + 1) % PREVIEW_EVERY == 0))
-                try: lo, cards = _train_step_safe(model, step_x, step_y, step_sl, ua, ad, ls, preview=want_preview, ladder=ladder, emit=emit)
+                try: lo, cards = _train_step(model, step_x, step_y, step_sl, ua, ad, ls, preview=want_preview, ladder=ladder, emit=emit)
                 except CohortAbort: return
                 lval = float(lo.item()); micro_step += 1
                 _unscaled = lval * as_
@@ -3355,7 +3854,7 @@ def run_single_round_wrapper(srv, at, se, emit):
                 sd = (int(cc_seed) * 100_003 + micro_step * 1009) & 0xFFFFFFFF if cohort_mode else (abs(hash("t")) % 10000) + micro_step * 1000 + mi
                 x, y = ds.get_batch(bs, seed=sd)
                 want_preview = (model.main_device.type != 'cpu') and ((micro_step == 0) or ((micro_step + 1) % PREVIEW_EVERY == 0))
-                try: lo, cards = _train_step_safe(model, x, y, sl, ua, ad, ls, preview=want_preview, ladder=ladder, emit=emit)
+                try: lo, cards = _train_step(model, x, y, sl, ua, ad, ls, preview=want_preview, ladder=ladder, emit=emit)
                 except CohortAbort: return
                 lval = float(lo.item()) * as_
                 als += lval; tt += x.numel(); accum_count += 1; micro_step += 1
@@ -3410,6 +3909,8 @@ def run_single_round_wrapper(srv, at, se, emit):
         iew = None; has_engram = bool(len(si) > 0); engram_sparse_count = int(len(si))
 
         submit_extra = {
+            "paradigm": _paradigm_name() or "backprop",
+            "dilocoInner": int(os.environ.get("CROWDGPT_DILOCO_INNER", "0") or 0),
             "crossCheckUsed": cohort_mode,
             "actualSeed": int(cc_seed) if (cohort_mode and cc_seed is not None) else None,
             "actualSteps": int(micro_step),
@@ -3418,11 +3919,28 @@ def run_single_round_wrapper(srv, at, se, emit):
             "lossStd": float(fl_std),
             "lossSamples": int(round_loss_count),
         }
-        _codec = "ngd1" if (DELTA_CODEC == "ngd1" and not has_engram) else "off"
-        pl = json.dumps({"taskId": tid, "loss": fl, "localSteps": micro_step, "tokensProcessed": tt, "loraRank": 0, "isDelta": True, "weightFormat": "bf16", "hasEngram": has_engram, "engramSparseCount": engram_sparse_count, "deltaCodec": _codec, **submit_extra}).encode()
+        _sparse_cfg = _sparse_config() if DELTA_CODEC == "sparse" else None
+        _codec = ("sparse" if _sparse_cfg is not None
+                  else ("ngd1" if (DELTA_CODEC == "ngd1" and not has_engram) else "off"))
+        _block = None; _sparse_stats = None; _base_meta = {}
+        if _codec == "sparse":
+            # Built before the header: the server needs `baseBytes` to find the
+            # engram tail, and the length is only known once the entries exist.
+            _block, _sparse_stats = _sparse_base_block(model, iw, _sparse_cfg, _SPARSE["feedback"])
+            _base_meta = {"baseCodec": "sparse", "baseBytes": len(_block),
+                          "baseCount": _sparse_stats["emitted"]}
+        pl = json.dumps({"taskId": tid, "loss": fl, "localSteps": micro_step, "tokensProcessed": tt, "loraRank": 0, "isDelta": True, "weightFormat": "bf16", "hasEngram": has_engram, "engramSparseCount": engram_sparse_count, "deltaCodec": _codec, **_base_meta, **submit_extra}).encode()
         delta_fd, delta_path = tempfile.mkstemp(prefix="delta-", suffix=".gz", dir=str(CHECKPOINT_DIR)); os.close(delta_fd)
         try:
-            if _codec == "ngd1":
+            if _codec == "sparse":
+                delta_size = _write_delta_file_sparse(delta_path, struct.pack('<I', len(pl)) + pl,
+                                                      _block, (si, sv))
+                _m = (_sparse_stats["massSent"] / _sparse_stats["mass"]) if _sparse_stats["mass"] > 0 else 0.0
+                emit('log', f"[CODEC] sparse {_sparse_cfg.frac:.1%}: {_sparse_stats['emitted']:,}/"
+                            f"{_sparse_stats['coords']:,} entries ({_m:.1%} of |delta|), "
+                            f"{delta_size / (1024 * 1024):.1f} MB, residual "
+                            f"{_sparse_stats['feedbackBytes'] / (1024 * 1024):.1f} MB")
+            elif _codec == "ngd1":
                 delta_size = _write_delta_file_ngd1(delta_path, struct.pack('<I', len(pl)) + pl, model, iw)
                 emit('log', f"[CODEC] ngd1 payload {delta_size / (1024 * 1024):.1f} MB")
             else:
@@ -3431,9 +3949,9 @@ def run_single_round_wrapper(srv, at, se, emit):
             try: os.unlink(delta_path)
             except OSError: pass
             raise
-        finally: iw = None; model = None; del si, sv, pl; _clear_accel_cache(train_device); _trim_heap()
+        finally: iw = None; model = None; del si, sv, pl, _block; _clear_accel_cache(train_device); _trim_heap()
         
-        upload_size_mb = delta_size / (1024 * 1024); meta = {"taskId": tid, "loss": fl, "localSteps": micro_step, "tokensProcessed": tt, "loraRank": 0, "isDelta": True, "weightFormat": "bf16", "hasEngram": has_engram, "engramSparseCount": engram_sparse_count, "deltaCodec": _codec, **submit_extra}
+        upload_size_mb = delta_size / (1024 * 1024); meta = {"taskId": tid, "loss": fl, "localSteps": micro_step, "tokensProcessed": tt, "loraRank": 0, "isDelta": True, "weightFormat": "bf16", "hasEngram": has_engram, "engramSparseCount": engram_sparse_count, "deltaCodec": _codec, **_base_meta, **submit_extra}
         timing_handoff = _submit_delta_background(srv, h, delta_path, delta_size, meta, emit, se, hb=hb, timing=timing)   # discards the delta if refused
         uck.clear()
         threading.Thread(target=prefetch_latest_hf_weights, args=(se, emit), daemon=True).start()
@@ -3442,10 +3960,8 @@ def run_single_round_wrapper(srv, at, se, emit):
     except BaseException as e:
         exc_type = type(e); exc_text = f"{type(e).__name__}: {e}"[:200] if isinstance(e, Exception) else ""; raise
     finally:
-        rejected = hb.close(); model = ob = oe = x = y = lo = iw = ie = iew = ds = None; gc.collect()
-        if train_backend in ("CUDA", "ROCM"):
-            try: torch.cuda.empty_cache()
-            except Exception: pass
+        rejected = hb.close(); model = ob = oe = x = y = lo = iw = ie = iew = ds = ladder = None
+        _clear_accel_cache(train_device)
         try: prune_hf_cache()
         except Exception: pass
         if not timing_handoff:
@@ -3457,6 +3973,47 @@ def run_single_round_wrapper(srv, at, se, emit):
         if rejected is not None and not se.is_set():
             if exc_type is None or issubclass(exc_type, KeyboardInterrupt) or (issubclass(exc_type, Exception) and not issubclass(exc_type, (AuthRejected, CoordinatorRejected))):
                 raise CoordinatorRejected(rejected + (f" (the round had also failed: {exc_text})" if exc_text else ""), status=403)
+
+def _gpu_preflight(vram_gb, se, emit):
+    """Run before taking a task. Re-measures free VRAM; while the GPU is occupied by another process, wait instead of
+    taking a task, downloading ~2 GB of weights and failing (a full GPU cannot even create a cuBLAS handle).
+    Also refreshes the auto placement budget, which was measured once at Start and stayed tiny after the other
+    process exited. CROWDGPT_MIN_FREE_VRAM_GB sets the floor (default 1.0, 0 disables). Returns False only if stopped."""
+    if train_backend not in ("CUDA", "ROCM"): return True
+    try:
+        if not torch.cuda.is_available(): return True
+        need = float(os.environ.get("CROWDGPT_MIN_FREE_VRAM_GB", "1.0") or 1.0)
+    except Exception: return True
+    if need <= 0: return True
+    waited = False; last_log = 0.0
+    while not se.is_set():
+        try:
+            idx = train_device.index if train_device is not None and train_device.index is not None else 0
+            _clear_accel_cache(train_device)
+            free, total = torch.cuda.mem_get_info(idx)
+        except Exception: return True
+        free_gb = free / 1024**3
+        if free_gb >= need:
+            if waited: emit('log', f"✅ GPU memory is free again ({free_gb:.1f} GB) — resuming.")
+            if "auto_gb" in memory_config:
+                before = memory_config.get("ram_gb")
+                try:
+                    auto_detect_vram_budget(); memory_config["auto_gb"] = memory_config["ram_gb"]; apply_vram_override(vram_gb)
+                    if before != memory_config.get("ram_gb"):
+                        emit('log', f"Placement budget updated: {before} → {memory_config['ram_gb']:.2f} GB")
+                except Exception: pass
+            return True
+        waited = True
+        if time.monotonic() - last_log > 120 or last_log == 0.0:
+            last_log = time.monotonic()
+            emit('log', f"⏸️ Only {free_gb:.1f} GB of GPU memory is free ({(total - free) / 1024**3:.1f} of {total / 1024**3:.1f} GB in use "
+                        f"by other programs — a game, another AI app, or an old CrowdGPT window still running). "
+                        f"Waiting for it to free up; check `nvidia-smi`. Set CROWDGPT_MIN_FREE_VRAM_GB=0 to try anyway.")
+            emit('status', 'waiting')
+        for _ in range(15):
+            if se.is_set(): break
+            time.sleep(1)
+    return False
 
 def _do_backend_setup(selected_backend, vram_gb, emit):
     global train_device, train_backend
@@ -3477,7 +4034,7 @@ def _check_updates_between_rounds(emit):
 
 class Api:
     def __init__(self):
-        self.window = None; self.stop_event = threading.Event(); self.thread = None
+        self.window = None; self.stop_event = threading.Event(); self.thread = None; self._activity_monitor = None
         self.auth_token = None; self.username = None; self.server_url = DEFAULT_SERVER
         self._lp = 0.0
         self._ui_queue = queue.Queue(maxsize=2048)
@@ -3626,21 +4183,34 @@ class Api:
         except Exception: pass
         self.emit('login_success', {'username': 'anonymous'})
 
+    def _stop_activity_monitor(self):
+        m = getattr(self, '_activity_monitor', None)
+        if m is not None:
+            try: m.stop()
+            except Exception: pass
+            self._activity_monitor = None
+
     def start(self):
         if self.thread and self.thread.is_alive():
             if self.stop_event.is_set():
                 self.emit('log', "Previous run is still shutting down — press Start again in a moment."); self.emit('start_refused', {})
             return
+        self._stop_activity_monitor()
         self.stop_event.clear()
+        if _activity_pause_enabled():
+            self._activity_monitor = UserActivityMonitor(self.stop_event, self.emit)
+            self._activity_monitor.start()
         self.thread = threading.Thread(target=self._rs, daemon=True)
         self.thread.start()
         self.emit('started', {})
-      
+
     def stop(self):
         self.stop_event.set()
+        self._stop_activity_monitor()
         self.emit('stopped', {})
     def logout(self):
         self.stop_event.set()                                      # stops training after the current step; a new login can't start until it has ended
+        self._stop_activity_monitor()
         self.auth_token = None; self.username = None
         try: AUTH_TOKEN_FILE.unlink(missing_ok=True)
         except Exception: pass
@@ -3652,8 +4222,9 @@ class Api:
         try: _do_backend_setup(self.selected_backend, self.vram_gb, self.emit)
         except Exception as e:
             self.emit('log', f"Error: {e}"); self.emit('status', 'idle'); return
-        round_count = 0
+        round_count = 0; fails = 0
         while not self.stop_event.is_set():
+            if not _gpu_preflight(self.vram_gb, self.stop_event, self.emit): break
             round_count += 1; apply_vram_override(self.vram_gb)
             self.emit('log', f"{'='*40}\nStarting Round Cycle #{round_count}\n{'='*40}")
             try: run_single_round_wrapper(self.server_url, self.auth_token, self.stop_event, self.emit)
@@ -3676,9 +4247,14 @@ class Api:
                 import traceback; tb = traceback.format_exc()
                 for ln in tb.splitlines()[-14:]: self.emit('log', ln)
                 self.emit('log', f"Round failed: {e}")
+                fails += 1
+            else: fails = 0
             if self.stop_event.is_set(): break
-            self._check_updates_between_rounds(); self.emit('status', 'waiting'); self.emit('log', "✅ Round complete. Auto-relaunching next round in 10s...")
-            for _ in range(10):
+            wait_s = 10 if not fails else min(10 * 2 ** (fails - 1), 300)     # back off on repeated failures: each retry re-downloads the weights
+            self._check_updates_between_rounds(); self.emit('status', 'waiting')
+            self.emit('log', f"✅ Round complete. Auto-relaunching next round in {wait_s}s..." if not fails
+                      else f"⚠️ Round failed ({fails} in a row). Retrying in {wait_s}s...")
+            for _ in range(wait_s):
                 if self.stop_event.is_set(): break
                 time.sleep(1)
         self.emit('status', 'idle'); self.emit('log', "👋 Training stopped by user.")
@@ -4316,6 +4892,12 @@ def parse_args():
     p.add_argument("--no-tokenizer", action="store_true")
     p.add_argument("--no-update", action="store_true")
     p.add_argument("--no-engram", action="store_true")
+    p.add_argument("--paradigm", default=os.environ.get("CROWDGPT_PARADIGM", ""),
+                   choices=("", "backprop", "solo", "relora", "dust", "mosaic"),
+                   help="v2 training paradigm (default backprop; per-paradigm knobs are env vars)")
+    p.add_argument("--diloco-inner", type=int,
+                   default=int(os.environ.get("CROWDGPT_DILOCO_INNER", "0") or 0),
+                   help="DiLoCo inner steps per outer round (0 = sync every round, v1 behaviour)")
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--debug", action="store_true")
     p.add_argument("--tui", action="store_true", help="force the full-screen terminal dashboard in headless mode")
@@ -4324,6 +4906,8 @@ def parse_args():
     p.add_argument("--json", action="store_true", help="with --doctor, print the report as JSON")
     p.add_argument("--version", action="version", version=f"crowdgpt-client {CLIENT_VERSION}")
     args = p.parse_args()
+    if getattr(args, "paradigm", ""): os.environ["CROWDGPT_PARADIGM"] = str(args.paradigm)
+    os.environ["CROWDGPT_DILOCO_INNER"] = str(int(getattr(args, "diloco_inner", 0) or 0))
     if args.json and not args.doctor:
         p.error("--json requires --doctor")
     return args
@@ -4473,6 +5057,7 @@ def _run_headless(args, emit, dashboard=None, control=None):
             control.wait_while_paused()
             if control.quit_event.is_set(): break
             continue
+        if not _gpu_preflight(args.vram_gb, stop_event, emit): break
         round_count += 1; apply_vram_override(args.vram_gb)
         log.info(f"Round {round_count}" + (f"/{max_rounds}" if max_rounds else ""))
         try: run_single_round_wrapper(args.server, auth_token, stop_event, emit)
@@ -4506,11 +5091,50 @@ def _run_headless(args, emit, dashboard=None, control=None):
     _join_upload(stop_event, timeout=(15.0 if stop_event.is_set() else None))
     return 0
 
+_STALL_FH = None
+
+def _start_stall_watchdog(limit_s: float = 8.0):
+    """If the whole Python process stops for `limit_s` seconds (what makes the Windows window say "Not responding":
+    something holds the GIL, e.g. CUDA initialisation or a driver call), write every thread's stack to
+    checkpoints/stall_trace.log. faulthandler's timer runs in C and needs no GIL, so it fires even then.
+    A heartbeat thread re-arms it every second; CROWDGPT_STALL_TRACE=0 disables it."""
+    global _STALL_FH
+    if os.environ.get("CROWDGPT_STALL_TRACE", "1") == "0": return
+    try:
+        import faulthandler
+        CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
+        _STALL_FH = open(CHECKPOINT_DIR / "stall_trace.log", "a", buffering=1)
+        def _beat():
+            while True:
+                try: faulthandler.dump_traceback_later(limit_s, repeat=False, file=_STALL_FH)
+                except Exception: return
+                time.sleep(1.0)
+        threading.Thread(target=_beat, daemon=True, name="stall-watchdog").start()
+    except Exception as e: log.warning(f"[ui] stall watchdog unavailable: {e}")
+
+def _prewarm_gpu(api):
+    """Initialise CUDA/ROCm *before* the window exists. torch's one-time GPU initialisation holds the Python GIL for
+    5-20 s on a cold Windows start; the window's message loop is Python too, so if that happens while the window is
+    open Windows shows "Not responding". Doing it first moves the wait to before the window appears.
+    CROWDGPT_PREWARM_GPU=0 disables it."""
+    if os.environ.get("CROWDGPT_PREWARM_GPU", "1") == "0": return
+    try:
+        if not torch.cuda.is_available(): return
+        dev, be = detect_training_backend(api.selected_backend)
+        if be not in ("CUDA", "ROCM"): return
+        t0 = time.time(); log.info("[gpu] initialising the GPU — the window opens right after...")
+        with torch.cuda.device(dev):
+            a = torch.zeros(16, 16, device=dev); float((a @ a).sum().item()); del a       # context + cuBLAS handle
+            torch.cuda.empty_cache()
+        log.info(f"[gpu] ready in {time.time() - t0:.1f}s")
+    except Exception as e: log.warning(f"[gpu] pre-warm skipped: {e}")
+
 def run_gui(args):
     if not _WEBVIEW_OK:
         log.error(f"GUI unavailable: {_WEBVIEW_ERR}"); return 4
 
     api = Api(); start_tokenizer_loader()
+    _prewarm_gpu(api); _start_stall_watchdog()
     kwargs = {"js_api": api, "width": 1000, "height": 720, "min_size": (320, 240)}
 
     html_path = Path(__file__).resolve().parent / "client.html"

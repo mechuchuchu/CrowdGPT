@@ -1,4 +1,4 @@
-CrowdGPT v3.3 changelog:
-- Merged Pull requests on GitHub
-- Many bug fixes
-Check GitHub for more infos
+CrowdGPT Client v3.9 changelog:
+- Crowd-v1.5 is here
+- Better VRAM management for AMD GPUs
+Check GitHub or Discord for more infos
